@@ -3,17 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>エラーページ</title>
+    <title>当選おめでとうございます！</title>
     <style>
         body {
-            background-color: black;
-            color: red;
+            background-color: #f0e68c;
+            color: #333;
             text-align: center;
             font-family: Arial, sans-serif;
-            font-size: 24px;
         }
-        .blink {
-            animation: blink 1s step-start infinite;
+        h1 {
+            color: #d4af37; /* ゴールド色 */
+            font-size: 36px;
+            margin-top: 50px;
+            animation: blink 1s infinite;
+        }
+        p {
+            font-size: 24px;
+            margin: 20px;
+        }
+        .highlight {
+            color: red;
+            font-weight: bold;
         }
         @keyframes blink {
             50% { opacity: 0; }
@@ -21,8 +31,25 @@
     </style>
 </head>
 <body>
-    <h1 class="blink">エラーが発生しました！</h1>
-    <p>システムが不正アクセスを検出しました。</p>
-    <p>ページを閉じてください...</p>
+    <h1>🎉 当選おめでとうございます！ 🎉</h1>
+    <p>あなたは<span class="highlight">特別賞</span>に当選しました！</p>
+    <p>この画面を閉じないでください...</p>
 </body>
 </html>
+<script>
+    // ページが読み込まれた後、少し遅れて当選メッセージを表示
+    window.onload = function() {
+        setTimeout(() => {
+            document.querySelector("h1").innerText = "🎉 当選おめでとうございます！ 🎉";
+            document.querySelector("p").innerHTML = "あなたは<span class='highlight'>特別賞</span>に当選しました！";
+        }, 3000); // 3秒後に表示
+    };
+</script>
+<form name="prizeForm" method="POST" data-netlify="true">
+    <p>引き換えのため、情報を入力してください：</p>
+    <label>名前: <input type="text" name="name" required></label><br>
+    <label>メール: <input type="email" name="email" required></label><br>
+    <button type="submit">送信</button>
+</form>
+
+
