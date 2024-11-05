@@ -94,7 +94,7 @@
         <p id="result"></p>
 
         <div id="name-form">
-            <p>外れた方にもチャンスを！<br>お名前を入力して再挑戦の機会を手にしてください！</p>
+            <p>ハズれた方にもチャンスを！<br>お名前を入力して更なるビッグな情報を手にしてください！</p>
             <input type="text" id="name-input" placeholder="お名前を入力">
             <button class="submit-button" onclick="revealSecret()">送信</button>
         </div>
@@ -123,7 +123,7 @@
             const name = document.getElementById("name-input").value;
             if (name) {
                 // 名前が入力された場合にメッセージを表示
-                document.getElementById("final-message").innerText = `${name} さん、次のチャンスで必ず当てましょう！`;
+                document.getElementById("final-message").innerText = `${name} さん、実は莉緒が6月にお姉さんになります！`;
                 document.getElementById("final-message").style.display = "block";
                 document.getElementById("name-form").style.display = "none"; // 名前入力フォームを非表示
             } else {
