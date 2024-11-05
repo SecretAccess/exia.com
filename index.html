@@ -10,6 +10,7 @@
             color: #f9f9f9;
             text-align: center;
             font-family: "Verdana", sans-serif;
+            overflow: hidden;
         }
         .container {
             max-width: 600px;
@@ -19,6 +20,8 @@
             box-shadow: 0 4px 12px rgba(255, 223, 0, 0.5);
             border-radius: 12px;
             margin-top: 50px;
+            position: relative;
+            z-index: 10;
         }
         h1 {
             color: #ffd700;
@@ -70,6 +73,19 @@
             margin-bottom: 20px;
             font-weight: bold;
         }
+        /* 紙吹雪のスタイル */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: gold;
+            animation: confetti-fall linear infinite;
+            z-index: 1;
+        }
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -83,9 +99,8 @@
         <p id="result"></p>
 
         <div id="popup">
-            <p id="popup-message">さらなるビッグな情報を手にしたいですか？</p>
-            <button class="popup-button" onclick="revealSecret()">はい</button>
-            <button class="popup-button" onclick="forceYes()">いいえ</button>
+            <p id="popup-message"></p>
+            <button class="popup-button" onclick="revealNextStep()">続きを見る</button>
         </div>
 
         <p id="final-message"></p>
@@ -104,38 +119,49 @@
                 document.getElementById("result").innerText = "残念！ハズれてしまいました…";
                 document.getElementById("result").style.display = "block";
                 button.style.display = "none"; // ボタンを非表示
-                document.getElementById("popup").style.display = "block"; // 最初のポップアップを表示
+                revealNextStep(); // 最初のメッセージ表示
             }, 3000); // 3秒後に結果表示
         }
 
-        function revealSecret() {
+        function revealNextStep() {
             revealStep++;
             const finalMessage = document.getElementById("final-message");
             const popup = document.getElementById("popup");
-            const popupMessage = document.getElementById("popup-message");
 
             if (revealStep === 1) {
                 finalMessage.innerText = "実は莉緒が…";
                 finalMessage.style.display = "block";
-                popupMessage.innerText = "気になりますか？";
+                popup.style.display = "block";
             } else if (revealStep === 2) {
                 finalMessage.innerText = "実は莉緒が2025年6月に…";
-                popupMessage.innerText = "気になりますよね？";
             } else if (revealStep === 3) {
                 finalMessage.innerText = "実は莉緒が2025年6月にお姉さんになります！";
-                popup.style.display = "none"; // 最後にポップアップを非表示
+                popup.style.display = "none"; // ポップアップを非表示
+                startConfetti(); // 紙吹雪の開始
             }
         }
 
-        function forceYes() {
-            // 「いいえ」を押しても「気になりますよね？」で再表示
-            const popupMessage = document.getElementById("popup-message");
-            if (revealStep === 0) {
-                popupMessage.innerText = "聞かないと損ですよ！ さらなるビッグな情報を手にしたいですか？";
-            } else {
-                popupMessage.innerText = "気になりますよね？";
+        function startConfetti() {
+            for (let i = 0; i < 100; i++) {
+                createConfetti();
             }
-            revealSecret(); // 「はい」を押した場合と同じ処理
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement("div");
+            confetti.classList.add("confetti");
+            confetti.style.left = Math.random() * window.innerWidth + "px";
+            confetti.style.backgroundColor = getRandomColor();
+            confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(confetti);
+
+            // 紙吹雪が消えるように設定
+            setTimeout(() => { confetti.remove(); }, 5000);
+        }
+
+        function getRandomColor() {
+            const colors = ["gold", "orange", "red", "green", "blue"];
+            return colors[Math.floor(Math.random() * colors.length)];
         }
     </script>
 </body>
