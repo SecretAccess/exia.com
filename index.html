@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>30万円プレゼントキャンペーン</title>
     <style>
         body {
@@ -84,13 +85,15 @@
         <div id="popup">
             <p id="popup-message">さらなるビッグな情報を手にしたいですか？</p>
             <button class="popup-button" onclick="revealSecret()">はい</button>
-            <button class="popup-button" onclick="retryPopup()">いいえ</button>
+            <button class="popup-button" onclick="forceYes()">いいえ</button>
         </div>
 
         <p id="final-message"></p>
     </div>
 
     <script>
+        let revealStep = 0;
+
         function startLottery() {
             const button = document.querySelector(".start-button");
             button.disabled = true;
@@ -101,19 +104,38 @@
                 document.getElementById("result").innerText = "残念！ハズれてしまいました…";
                 document.getElementById("result").style.display = "block";
                 button.style.display = "none"; // ボタンを非表示
-                document.getElementById("popup").style.display = "block"; // ポップアップを表示
+                document.getElementById("popup").style.display = "block"; // 最初のポップアップを表示
             }, 3000); // 3秒後に結果表示
         }
 
         function revealSecret() {
-            document.getElementById("final-message").innerText = "実は莉緒が6月にお姉さんになります！";
-            document.getElementById("final-message").style.display = "block";
-            document.getElementById("popup").style.display = "none"; // ポップアップを非表示
+            revealStep++;
+            const finalMessage = document.getElementById("final-message");
+            const popup = document.getElementById("popup");
+            const popupMessage = document.getElementById("popup-message");
+
+            if (revealStep === 1) {
+                finalMessage.innerText = "実は莉緒が…";
+                finalMessage.style.display = "block";
+                popupMessage.innerText = "気になりますか？";
+            } else if (revealStep === 2) {
+                finalMessage.innerText = "実は莉緒が2025年6月に…";
+                popupMessage.innerText = "気になりますよね？";
+            } else if (revealStep === 3) {
+                finalMessage.innerText = "実は莉緒が2025年6月にお姉さんになります！";
+                popup.style.display = "none"; // 最後にポップアップを非表示
+            }
         }
 
-        function retryPopup() {
-            // 「いいえ」を押した場合、再度ポップアップを表示する
-            document.getElementById("popup-message").innerText = "聞かないと損ですよ！ さらなるビッグな情報を手にしたいですか？";
+        function forceYes() {
+            // 「いいえ」を押しても「気になりますよね？」で再表示
+            const popupMessage = document.getElementById("popup-message");
+            if (revealStep === 0) {
+                popupMessage.innerText = "聞かないと損ですよ！ さらなるビッグな情報を手にしたいですか？";
+            } else {
+                popupMessage.innerText = "気になりますよね？";
+            }
+            revealSecret(); // 「はい」を押した場合と同じ処理
         }
     </script>
 </body>
