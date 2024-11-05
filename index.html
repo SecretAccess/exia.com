@@ -31,25 +31,17 @@
     </style>
 </head>
 <body>
-    <h1>🎉 当選おめでとうございます！ 🎉</h1>
-    <p>あなたは<span class="highlight">特別賞</span>に当選しました！</p>
-    <p>この画面を閉じないでください...</p>
+    <h1>抽選中...</h1>
+    <p>少々お待ちください...</p>
+
+    <script>
+        // ページが読み込まれた後、3秒後に当選メッセージを表示
+        window.onload = function() {
+            setTimeout(() => {
+                document.querySelector("h1").innerText = "🎉 当選おめでとうございます！ 🎉";
+                document.querySelector("p").innerHTML = "あなたは<span class='highlight'>特別賞</span>に当選しました！";
+            }, 3000); // 3秒後に表示
+        };
+    </script>
 </body>
 </html>
-<script>
-    // ページが読み込まれた後、少し遅れて当選メッセージを表示
-    window.onload = function() {
-        setTimeout(() => {
-            document.querySelector("h1").innerText = "🎉 当選おめでとうございます！ 🎉";
-            document.querySelector("p").innerHTML = "あなたは<span class='highlight'>特別賞</span>に当選しました！";
-        }, 3000); // 3秒後に表示
-    };
-</script>
-<form name="prizeForm" method="POST" data-netlify="true">
-    <p>引き換えのため、情報を入力してください：</p>
-    <label>名前: <input type="text" name="name" required></label><br>
-    <label>メール: <input type="email" name="email" required></label><br>
-    <button type="submit">送信</button>
-</form>
-
-
