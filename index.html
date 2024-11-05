@@ -27,6 +27,10 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            animation: spin 2s linear infinite;
+        }
+        #dartboard.stopped {
+            animation: none; /* 回転を停止 */
         }
         #dartboard p {
             color: white;
@@ -42,6 +46,10 @@
         @keyframes blink {
             50% { opacity: 0; }
         }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -56,9 +64,7 @@
 
     <script>
         document.getElementById("dartboard").addEventListener("click", function() {
-            // ダーツがクリックされたときに当選メッセージを表示
+            // 回転を停止させ、当選メッセージを表示
+            this.classList.add("stopped");
             document.getElementById("result").innerText = "🎉 当選おめでとうございます！特別賞を獲得しました！ 🎉";
         });
-    </script>
-</body>
-</html>
