@@ -3,68 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>抽選チャレンジ</title>
+    <title>30万円プレゼントキャンペーン</title>
     <style>
         body {
-            background-color: #f0e68c;
+            background-color: #f9f9f9;
             color: #333;
             text-align: center;
             font-family: Arial, sans-serif;
         }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 50px;
+        }
         h1 {
             color: #d4af37;
-            font-size: 36px;
-            margin-top: 50px;
-            animation: blink 1s infinite;
+            font-size: 32px;
+            margin-bottom: 20px;
         }
-        #dartboard {
-            width: 200px;
-            height: 200px;
-            background: conic-gradient(red, yellow, green, blue, red);
-            border-radius: 50%;
-            margin: 50px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .description {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        .start-button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #ff4500;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-            animation: spin 2s linear infinite;
+            transition: background-color 0.3s ease;
         }
-        #dartboard.stopped {
-            animation: none; /* 回転を停止 */
-        }
-        #dartboard p {
-            color: white;
-            font-weight: bold;
-            font-size: 24px;
+        .start-button:hover {
+            background-color: #e63946;
         }
         #result {
             font-size: 24px;
             margin-top: 30px;
             color: red;
             font-weight: bold;
+            display: none;
         }
-        @keyframes blink {
-            50% { opacity: 0; }
+        .highlight {
+            color: #d4af37;
+            font-weight: bold;
         }
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .official-badge {
+            font-size: 14px;
+            color: white;
+            background: #0080ff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>抽選チャレンジ！</h1>
-    <p>ダーツをタッチして結果を確認しよう！</p>
+    <div class="container">
+        <div class="official-badge">公式キャンペーン</div>
+        <h1>30万円プレゼントキャンペーン！</h1>
+        <p class="description">日頃のご愛顧に感謝し、抽選で<b class="highlight">30万円</b>が当たる特別キャンペーンを開催中です！下のボタンをクリックして、運試しをしてみましょう。</p>
 
-    <div id="dartboard">
-        <p>🎯</p>
+        <button class="start-button" onclick="startLottery()">抽選スタート</button>
+
+        <p id="result"></p>
     </div>
 
-    <p id="result"></p>
-
     <script>
-        document.getElementById("dartboard").addEventListener("click", function() {
-            // 回転を停止させ、当選メッセージを表示
-            this.classList.add("stopped");
-            document.getElementById("result").innerText = "🎉 当選おめでとうございます！特別賞を獲得しました！ 🎉";
-        });
+        function startLottery() {
+            // ボタンをクリックすると抽選結果を表示
+            const button = document.querySelector(".start-button");
+            button.disabled = true;
+            button.style.backgroundColor = "#aaa";
+            button.innerText = "抽選中...";
+
+            setTimeout(() => {
+                // 結果表示
+                document.getElementById("result").innerText = "🎉 おめでとうございます！30万円に当選しました！ 🎉";
+                document.getElementById("result").style.display = "block";
+                button.style.display = "none"; // ボタンを非表示
+            }, 3000); // 3秒後に結果表示
+        }
+    </script>
+</body>
+</html>
