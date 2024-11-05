@@ -6,7 +6,7 @@
     <title>30万円プレゼントキャンペーン</title>
     <style>
         body {
-            background-color: #1c1c1c;
+            background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
             color: #f9f9f9;
             text-align: center;
             font-family: "Verdana", sans-serif;
@@ -16,7 +16,7 @@
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            background: #333;
+            background: rgba(51, 51, 51, 0.9);
             box-shadow: 0 4px 12px rgba(255, 223, 0, 0.5);
             border-radius: 12px;
             margin-top: 50px;
@@ -52,12 +52,16 @@
             background-color: #daa520;
             transform: scale(1.05);
         }
-        #result, #popup, #final-message {
+        #result, #popup, #final-message, #loading {
             font-size: 24px;
             margin-top: 30px;
             color: red;
             font-weight: bold;
             display: none;
+        }
+        #loading {
+            color: #ffd700;
+            text-shadow: 0px 0px 6px rgba(255, 223, 0, 0.7);
         }
         .highlight {
             color: #ffd700;
@@ -80,7 +84,7 @@
             height: 10px;
             background-color: gold;
             animation: confetti-fall linear infinite;
-            z-index: 100; /* 最前面に配置 */
+            z-index: 100;
         }
         @keyframes confetti-fall {
             0% { transform: translateY(-100vh) rotate(0deg); }
@@ -97,9 +101,10 @@
         <button class="start-button" onclick="startLottery()">抽選スタート</button>
 
         <p id="result"></p>
+        <p id="loading">特別な情報を検索中です...</p>
 
         <div id="popup">
-            <p id="popup-message">さらなるビッグな情報を手にしたいですか？</p>
+            <p id="popup-message">お客さまだけの特別な情報が見つかりました！この情報を受け取りますか？</p>
             <button class="popup-button" onclick="revealNextStep(true)">はい</button>
             <button class="popup-button" onclick="revealNextStep(false)">いいえ</button>
         </div>
@@ -121,7 +126,17 @@
                 document.getElementById("result").innerText = "残念！ハズれてしまいました。";
                 document.getElementById("result").style.display = "block";
                 button.style.display = "none"; // ボタンを非表示
-                document.getElementById("popup").style.display = "block"; // 最初のポップアップを表示
+
+                // 少し遅れてローディング風のメッセージを表示
+                setTimeout(() => {
+                    document.getElementById("loading").style.display = "block";
+
+                    // ローディング後に特別情報の質問を表示
+                    setTimeout(() => {
+                        document.getElementById("loading").style.display = "none";
+                        document.getElementById("popup").style.display = "block";
+                    }, 2000); // 2秒後に特別情報の質問を表示
+                }, 1500); // 1.5秒後にローディング開始
             }, 3000); // 3秒後に結果表示
         }
 
