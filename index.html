@@ -35,7 +35,7 @@
             color: #d3d3d3;
             margin-bottom: 30px;
         }
-        .start-button, .popup-button {
+        .start-button, .next-button, .popup-button {
             display: inline-block;
             padding: 15px 30px;
             font-size: 20px;
@@ -48,7 +48,7 @@
             box-shadow: 0 4px 10px rgba(255, 215, 0, 0.6);
             margin: 10px;
         }
-        .start-button:hover, .popup-button:hover {
+        .start-button:hover, .next-button:hover, .popup-button:hover {
             background-color: #daa520;
             transform: scale(1.05);
         }
@@ -105,6 +105,7 @@
         </div>
 
         <p id="final-message"></p>
+        <button class="next-button" id="nextButton" onclick="revealNextStep(true)" style="display: none;">続きを見る</button>
     </div>
 
     <script>
@@ -128,25 +129,27 @@
             const finalMessage = document.getElementById("final-message");
             const popup = document.getElementById("popup");
             const popupMessage = document.getElementById("popup-message");
+            const nextButton = document.getElementById("nextButton");
 
-            if (!isInterested) {
+            if (!isInterested && revealStep === 0) {
                 popupMessage.innerText = "本当は気になりますよね？";
                 return; // 「いいえ」を押すとループで再度「本当は気になりますよね？」を表示
             }
 
-            revealStep++;
-            if (revealStep === 1) {
+            if (revealStep === 0) {
+                popup.style.display = "none"; // 最初の質問を非表示
                 finalMessage.innerText = "実は莉緒が…";
                 finalMessage.style.display = "block";
-                popupMessage.innerText = "続きを見る";
-            } else if (revealStep === 2) {
+                nextButton.style.display = "inline-block"; // 「続きを見る」ボタンを表示
+            } else if (revealStep === 1) {
                 finalMessage.innerText = "実は莉緒が2025年6月に…";
-                popupMessage.innerText = "続きを見る";
-            } else if (revealStep === 3) {
-                finalMessage.innerText = "莉緒が2025年6月にお姉さんになります！";
-                popup.style.display = "none"; // 最後にポップアップを非表示
+            } else if (revealStep === 2) {
+                finalMessage.innerText = "実は莉緒が2025年6月にお姉さんになります！";
+                nextButton.style.display = "none"; // 最後のメッセージ表示後にボタンを非表示
                 startConfetti(); // 紙吹雪の開始
             }
+
+            revealStep++;
         }
 
         function startConfetti() {
