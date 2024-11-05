@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
     <title>30万円プレゼントキャンペーン</title>
     <style>
         body {
@@ -32,7 +31,7 @@
             color: #d3d3d3;
             margin-bottom: 30px;
         }
-        .start-button {
+        .start-button, .popup-button {
             display: inline-block;
             padding: 15px 30px;
             font-size: 20px;
@@ -43,41 +42,18 @@
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
             box-shadow: 0 4px 10px rgba(255, 215, 0, 0.6);
+            margin: 10px;
         }
-        .start-button:hover {
+        .start-button:hover, .popup-button:hover {
             background-color: #daa520;
             transform: scale(1.05);
         }
-        #result, #name-form, #final-message {
+        #result, #popup, #final-message {
             font-size: 24px;
             margin-top: 30px;
-            color: #ff4500;
+            color: red;
             font-weight: bold;
             display: none;
-        }
-        #name-input {
-            padding: 10px;
-            font-size: 18px;
-            margin-right: 10px;
-            border-radius: 5px;
-            border: 1px solid #ffd700;
-            background-color: #444;
-            color: #fff;
-        }
-        .submit-button {
-            padding: 10px 20px;
-            font-size: 18px;
-            color: #fff;
-            background-color: #ff4500;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 8px rgba(255, 69, 0, 0.5);
-        }
-        .submit-button:hover {
-            background-color: #e63946;
-            transform: scale(1.05);
         }
         .highlight {
             color: #ffd700;
@@ -105,10 +81,10 @@
 
         <p id="result"></p>
 
-        <div id="name-form">
-            <p>ハズれた方にもチャンスを！<br>お名前を入力して更なるビッグな情報を手にしてください！</p>
-            <input type="text" id="name-input" placeholder="お名前を入力">
-            <button class="submit-button" onclick="revealSecret()">送信</button>
+        <div id="popup">
+            <p id="popup-message">さらなるビッグな情報を手にしたいですか？</p>
+            <button class="popup-button" onclick="revealSecret()">はい</button>
+            <button class="popup-button" onclick="retryPopup()">いいえ</button>
         </div>
 
         <p id="final-message"></p>
@@ -116,31 +92,28 @@
 
     <script>
         function startLottery() {
-            // ボタンをクリックすると抽選結果を表示
             const button = document.querySelector(".start-button");
             button.disabled = true;
             button.style.backgroundColor = "#555";
             button.innerText = "抽選中...";
 
             setTimeout(() => {
-                // 結果表示
                 document.getElementById("result").innerText = "残念！ハズれてしまいました…";
                 document.getElementById("result").style.display = "block";
                 button.style.display = "none"; // ボタンを非表示
-                document.getElementById("name-form").style.display = "block"; // 名前入力フォームを表示
+                document.getElementById("popup").style.display = "block"; // ポップアップを表示
             }, 3000); // 3秒後に結果表示
         }
 
         function revealSecret() {
-            const name = document.getElementById("name-input").value;
-            if (name) {
-                // 名前が入力された場合にメッセージを表示
-                document.getElementById("final-message").innerText = `${name} さん、実は莉緒が6月にお姉さんになります！`;
-                document.getElementById("final-message").style.display = "block";
-                document.getElementById("name-form").style.display = "none"; // 名前入力フォームを非表示
-            } else {
-                alert("名前を入力してください。");
-            }
+            document.getElementById("final-message").innerText = "実は莉緒が6月にお姉さんになります！";
+            document.getElementById("final-message").style.display = "block";
+            document.getElementById("popup").style.display = "none"; // ポップアップを非表示
+        }
+
+        function retryPopup() {
+            // 「いいえ」を押した場合、再度ポップアップを表示する
+            document.getElementById("popup-message").innerText = "聞かないと損ですよ！ さらなるビッグな情報を手にしたいですか？";
         }
     </script>
 </body>
