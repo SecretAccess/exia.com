@@ -62,6 +62,7 @@
         #loading {
             color: #ffd700;
             text-shadow: 0px 0px 6px rgba(255, 223, 0, 0.7);
+            animation: blink 1s infinite; /* 点滅アニメーションを追加 */
         }
         .highlight {
             color: #ffd700;
@@ -89,6 +90,11 @@
         @keyframes confetti-fall {
             0% { transform: translateY(-100vh) rotate(0deg); }
             100% { transform: translateY(100vh) rotate(360deg); }
+        }
+        /* 点滅アニメーション */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
     </style>
 </head>
