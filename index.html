@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>当選おめでとうございます！</title>
+    <title>抽選チャレンジ</title>
     <style>
         body {
             background-color: #f0e68c;
@@ -12,16 +12,30 @@
             font-family: Arial, sans-serif;
         }
         h1 {
-            color: #d4af37; /* ゴールド色 */
+            color: #d4af37;
             font-size: 36px;
             margin-top: 50px;
             animation: blink 1s infinite;
         }
-        p {
-            font-size: 24px;
-            margin: 20px;
+        #dartboard {
+            width: 200px;
+            height: 200px;
+            background: conic-gradient(red, yellow, green, blue, red);
+            border-radius: 50%;
+            margin: 50px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
         }
-        .highlight {
+        #dartboard p {
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        #result {
+            font-size: 24px;
+            margin-top: 30px;
             color: red;
             font-weight: bold;
         }
@@ -31,17 +45,20 @@
     </style>
 </head>
 <body>
-    <h1>抽選中...</h1>
-    <p>少々お待ちください...</p>
+    <h1>抽選チャレンジ！</h1>
+    <p>ダーツをタッチして結果を確認しよう！</p>
+
+    <div id="dartboard">
+        <p>🎯</p>
+    </div>
+
+    <p id="result"></p>
 
     <script>
-        // ページが読み込まれた後、3秒後に当選メッセージを表示
-        window.onload = function() {
-            setTimeout(() => {
-                document.querySelector("h1").innerText = "🎉 当選おめでとうございます！ 🎉";
-                document.querySelector("p").innerHTML = "あなたは<span class='highlight'>特別賞</span>に当選しました！";
-            }, 3000); // 3秒後に表示
-        };
+        document.getElementById("dartboard").addEventListener("click", function() {
+            // ダーツがクリックされたときに当選メッセージを表示
+            document.getElementById("result").innerText = "🎉 当選おめでとうございます！特別賞を獲得しました！ 🎉";
+        });
     </script>
 </body>
 </html>
