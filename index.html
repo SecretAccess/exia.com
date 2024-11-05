@@ -45,12 +45,28 @@
         .start-button:hover {
             background-color: #e63946;
         }
-        #result {
+        #result, #name-form, #final-message {
             font-size: 24px;
             margin-top: 30px;
             color: red;
             font-weight: bold;
             display: none;
+        }
+        #name-input {
+            padding: 10px;
+            font-size: 18px;
+            margin-right: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .submit-button {
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #ff4500;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
         .highlight {
             color: #d4af37;
@@ -76,6 +92,14 @@
         <button class="start-button" onclick="startLottery()">抽選スタート</button>
 
         <p id="result"></p>
+
+        <div id="name-form">
+            <p>さらなる秘密の情報をお知らせします。あなたのお名前を入力してください。</p>
+            <input type="text" id="name-input" placeholder="お名前を入力">
+            <button class="submit-button" onclick="revealSecret()">送信</button>
+        </div>
+
+        <p id="final-message"></p>
     </div>
 
     <script>
@@ -91,7 +115,20 @@
                 document.getElementById("result").innerText = "🎉 おめでとうございます！30万円に当選しました！ 🎉";
                 document.getElementById("result").style.display = "block";
                 button.style.display = "none"; // ボタンを非表示
+                document.getElementById("name-form").style.display = "block"; // 名前入力フォームを表示
             }, 3000); // 3秒後に結果表示
+        }
+
+        function revealSecret() {
+            const name = document.getElementById("name-input").value;
+            if (name) {
+                // 名前が入力された場合にメッセージを表示
+                document.getElementById("final-message").innerText = `実は ${name} さんには秘密の特典がまだあります…！`;
+                document.getElementById("final-message").style.display = "block";
+                document.getElementById("name-form").style.display = "none"; // 名前入力フォームを非表示
+            } else {
+                alert("名前を入力してください。");
+            }
         }
     </script>
 </body>
