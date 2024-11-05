@@ -10,7 +10,7 @@
             color: #f9f9f9;
             text-align: center;
             font-family: "Verdana", sans-serif;
-            overflow: hidden;
+            overflow-x: hidden;
         }
         .container {
             max-width: 600px;
@@ -73,6 +73,19 @@
             margin-bottom: 20px;
             font-weight: bold;
         }
+        /* 紙吹雪のスタイル */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: gold;
+            animation: confetti-fall linear infinite;
+            z-index: 100; /* 最前面に配置 */
+        }
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -112,14 +125,17 @@
         }
 
         function revealNextStep(isInterested) {
-            revealStep++;
             const finalMessage = document.getElementById("final-message");
             const popup = document.getElementById("popup");
             const popupMessage = document.getElementById("popup-message");
 
-            if (!isInterested && revealStep === 1) {
+            if (!isInterested) {
                 popupMessage.innerText = "本当は気になりますよね？";
-            } else if (revealStep === 1) {
+                return; // 「いいえ」を押すとループで再度「本当は気になりますよね？」を表示
+            }
+
+            revealStep++;
+            if (revealStep === 1) {
                 finalMessage.innerText = "実は莉緒が…";
                 finalMessage.style.display = "block";
                 popupMessage.innerText = "続きを見る";
@@ -129,7 +145,31 @@
             } else if (revealStep === 3) {
                 finalMessage.innerText = "実は莉緒が2025年6月にお姉さんになります！";
                 popup.style.display = "none"; // 最後にポップアップを非表示
+                startConfetti(); // 紙吹雪の開始
             }
+        }
+
+        function startConfetti() {
+            for (let i = 0; i < 100; i++) {
+                createConfetti();
+            }
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement("div");
+            confetti.classList.add("confetti");
+            confetti.style.left = Math.random() * window.innerWidth + "px";
+            confetti.style.backgroundColor = getRandomColor();
+            confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(confetti);
+
+            // 紙吹雪が消えるように設定
+            setTimeout(() => { confetti.remove(); }, 5000);
+        }
+
+        function getRandomColor() {
+            const colors = ["gold", "orange", "red", "green", "blue"];
+            return colors[Math.floor(Math.random() * colors.length)];
         }
     </script>
 </body>
