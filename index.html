@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>30万円プレゼントキャンペーン</title>
+    <title>30万円プレゼントキャンペーン - 招待専用</title>
     <style>
         body {
             background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
@@ -62,7 +62,7 @@
         #loading {
             color: #ffd700;
             text-shadow: 0px 0px 6px rgba(255, 223, 0, 0.7);
-            animation: blink 1s infinite; /* 点滅アニメーションを追加 */
+            animation: blink 1s infinite;
         }
         .highlight {
             color: #ffd700;
@@ -96,12 +96,26 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
+        /* 招待者情報のスタイル */
+        .invitation-info {
+            font-size: 18px;
+            color: #d3d3d3;
+            margin-bottom: 30px;
+        }
+        .inviter, .invitee {
+            font-weight: bold;
+            color: #ffd700;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="official-badge">公式キャンペーン</div>
+        <div class="official-badge">招待専用キャンペーン</div>
         <h1>30万プレゼント<br>キャンペーン！</h1>
+        <p class="invitation-info">
+            招待者: <span class="inviter">N・K</span><br>
+            被招待者: <span class="invitee">C・K様</span>
+        </p>
         <p class="description">日頃のご愛顧に感謝し、抽選で<b class="highlight">30万円</b>が当たる特別キャンペーンを開催中です！下のボタンをクリックして、運試しをしてみましょう。</p>
 
         <button class="start-button" onclick="startLottery()">抽選スタート</button>
@@ -131,19 +145,17 @@
             setTimeout(() => {
                 document.getElementById("result").innerText = "残念！ハズれてしまいました。";
                 document.getElementById("result").style.display = "block";
-                button.style.display = "none"; // ボタンを非表示
+                button.style.display = "none";
 
-                // 少し遅れてローディング風のメッセージを表示
                 setTimeout(() => {
                     document.getElementById("loading").style.display = "block";
 
-                    // ローディング後に特別情報の質問を表示
                     setTimeout(() => {
                         document.getElementById("loading").style.display = "none";
                         document.getElementById("popup").style.display = "block";
-                    }, 2000); // 2秒後に特別情報の質問を表示
-                }, 1000); // 1秒後にローディング開始
-            }, 3000); // 3秒後に結果表示
+                    }, 2000);
+                }, 1000);
+            }, 3000);
         }
 
         function revealNextStep(isInterested) {
@@ -154,20 +166,20 @@
 
             if (!isInterested && revealStep === 0) {
                 popupMessage.innerText = "本当は気になりますよね？";
-                return; // 「いいえ」を押すとループで再度「本当は気になりますよね？」を表示
+                return;
             }
 
             if (revealStep === 0) {
-                popup.style.display = "none"; // 最初の質問を非表示
+                popup.style.display = "none";
                 finalMessage.innerText = "実は2025年6月に…";
                 finalMessage.style.display = "block";
-                nextButton.style.display = "inline-block"; // 「続きを見る」ボタンを表示
+                nextButton.style.display = "inline-block";
             } else if (revealStep === 1) {
                 finalMessage.innerText = "実は莉緒が2025年6月に…";
             } else if (revealStep === 2) {
                 finalMessage.innerText = "莉緒が2025年6月にお姉さんになります！";
-                nextButton.style.display = "none"; // 最後のメッセージ表示後にボタンを非表示
-                startConfetti(); // 紙吹雪の開始
+                nextButton.style.display = "none";
+                startConfetti();
             }
 
             revealStep++;
@@ -187,7 +199,6 @@
             confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
             document.body.appendChild(confetti);
 
-            // 紙吹雪が消えるように設定
             setTimeout(() => { confetti.remove(); }, 5000);
         }
 
