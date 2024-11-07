@@ -25,7 +25,7 @@
             text-align: center;
         }
         .top-image img {
-            width: 60%;
+            width: 80%; /* 画像サイズを大きく設定 */
             margin: 0 auto 20px;
             display: block;
             opacity: 0.9;
@@ -108,7 +108,7 @@
             <img src="28e35337-acb5-415d-894a-9b901a0831e7.jpg" alt="キャンペーンロゴ">
         </div>
         <div class="invitation-info">
-            招待者限定キャンペーン<br>招待者: 日下望史
+            招待者限定キャンペーン<br>招待者: N・K様
         </div>
         <h1>30万円プレゼントキャンペーン</h1>
         <p class="description">
@@ -159,7 +159,7 @@
             const popupMessage = document.getElementById("popup-message");
 
             if (!isInterested && revealStep === 0) {
-                popupMessage.innerText = "気になりますよね？";
+                popupMessage.innerText = "本当にいいんですか？";
                 return;
             }
 
