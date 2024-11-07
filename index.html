@@ -6,81 +6,85 @@
     <title>30万円プレゼントキャンペーン - 招待専用</title>
     <style>
         body {
-            background-color: #121212;
-            color: #f9f9f9;
-            font-family: "Verdana", sans-serif;
-            text-align: center;
+            background-color: #f8f8f8;
+            color: #333;
+            font-family: "Arial", sans-serif;
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
         .top-image {
+            width: 100%;
+            display: flex;
+            justify-content: center;
             padding: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .top-image img {
-            width: 200px;
+            width: 180px;
         }
         .container {
             max-width: 600px;
-            margin-top: 20px;
             padding: 30px;
-            background: #1e1e1e;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            margin-top: 20px;
+            text-align: center;
         }
         h1 {
-            color: #ffffff;
-            font-size: 34px;
+            font-size: 32px;
+            font-weight: bold;
+            color: #222;
             margin-bottom: 20px;
+        }
+        .description {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .invitation-info {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 20px;
+        }
+        .highlight {
+            color: #222;
             font-weight: bold;
         }
-        .description, .invitation-info {
-            color: #d3d3d3;
-            font-size: 18px;
-            line-height: 1.6;
-        }
-        .start-button, .next-button, .popup-button {
-            padding: 12px 25px;
-            font-size: 18px;
-            color: #121212;
-            background-color: #f0f0f0;
-            border: 2px solid #d3d3d3;
-            border-radius: 8px;
+        .start-button, .popup-button {
+            padding: 12px 30px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #333;
+            border: none;
+            border-radius: 6px;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
-            margin-top: 15px;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
-        .start-button:hover, .next-button:hover, .popup-button:hover {
-            background-color: #b3b3b3;
+        .start-button:hover, .popup-button:hover {
+            background-color: #555;
             transform: scale(1.05);
         }
         #result, #popup, #final-message, #loading {
-            font-size: 20px;
-            color: #f9f9f9;
+            font-size: 18px;
+            color: #444;
             margin-top: 30px;
             display: none;
         }
-        .highlight {
-            color: #ffd700;
-            font-weight: bold;
-        }
-        .official-badge {
-            font-size: 14px;
-            color: #121212;
-            background-color: #ffffff;
-            padding: 5px 10px;
-            border-radius: 5px;
-            display: inline-block;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-        /* 点滅アニメーション */
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+        /* モノクロのスタイリッシュアニメーション */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
     </style>
 </head>
@@ -89,15 +93,16 @@
     <div class="top-image">
         <img src="28e35337-acb5-415d-894a-9b901a0831e7.jpg" alt="キャンペーン画像">
     </div>
-    
+
     <div class="container">
-        <div class="official-badge">招待専用キャンペーン</div>
-        <h1>30万円プレゼント<br>キャンペーン！</h1>
+        <h1>30万円プレゼント<br>キャンペーン</h1>
         <p class="invitation-info">
             招待者: <span class="highlight">日下望史</span><br>
             被招待者: <span class="highlight">●様</span>
         </p>
-        <p class="description">日頃のご愛顧に感謝し、抽選で<b class="highlight">30万円</b>が当たる特別キャンペーンを開催中です！下のボタンをクリックして、運試しをしてみましょう。</p>
+        <p class="description">
+            日頃のご愛顧に感謝して、特別な抽選キャンペーンを開催中です。<br>30万円の賞金があなたを待っています。
+        </p>
 
         <button class="start-button" onclick="startLottery()">抽選スタート</button>
 
@@ -105,13 +110,12 @@
         <p id="loading">特別な情報を検索中です...</p>
 
         <div id="popup">
-            <p id="popup-message">お客さまだけの特別な情報が見つかりました！この情報を受け取りますか？</p>
+            <p id="popup-message">特別な情報が見つかりました。次のステップに進みますか？</p>
             <button class="popup-button" onclick="revealNextStep(true)">はい</button>
             <button class="popup-button" onclick="revealNextStep(false)">いいえ</button>
         </div>
 
         <p id="final-message"></p>
-        <button class="next-button" id="nextButton" onclick="revealNextStep(true)" style="display: none;">続きを見る</button>
     </div>
 
     <script>
@@ -120,7 +124,7 @@
         function startLottery() {
             const button = document.querySelector(".start-button");
             button.disabled = true;
-            button.style.backgroundColor = "#333";
+            button.style.backgroundColor = "#555";
             button.innerText = "抽選中...";
 
             setTimeout(() => {
@@ -130,7 +134,6 @@
 
                 setTimeout(() => {
                     document.getElementById("loading").style.display = "block";
-
                     setTimeout(() => {
                         document.getElementById("loading").style.display = "none";
                         document.getElementById("popup").style.display = "block";
@@ -143,7 +146,6 @@
             const finalMessage = document.getElementById("final-message");
             const popup = document.getElementById("popup");
             const popupMessage = document.getElementById("popup-message");
-            const nextButton = document.getElementById("nextButton");
 
             if (!isInterested && revealStep === 0) {
                 popupMessage.innerText = "本当は気になりますよね？";
@@ -154,15 +156,13 @@
                 popup.style.display = "none";
                 finalMessage.innerText = "実は2025年6月に…";
                 finalMessage.style.display = "block";
-                nextButton.style.display = "inline-block";
+                revealStep++;
             } else if (revealStep === 1) {
                 finalMessage.innerText = "実は莉緒が2025年6月に…";
+                revealStep++;
             } else if (revealStep === 2) {
                 finalMessage.innerText = "莉緒が2025年6月にお姉さんになります！";
-                nextButton.style.display = "none";
             }
-
-            revealStep++;
         }
     </script>
 </body>
