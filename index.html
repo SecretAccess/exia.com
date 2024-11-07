@@ -82,7 +82,8 @@
             transition: transform 0.3s;
             animation: pulse 1.5s ease-in-out infinite alternate;
         }
-        .highlight-button:hover {
+        .highlight-button:hover, #next-button {
+            background-color: #444;
             transform: scale(1.05);
         }
         .secondary-button {
@@ -106,21 +107,23 @@
             margin-top: 30px;
             font-size: 16px;
             color: #333;
+            text-align: left;
         }
         .testimonials h2, .real-time-winner h2 {
             font-size: 14px;
             color: #888;
             margin-bottom: 10px;
-            text-align: center;
+            text-align: left;
         }
         .testimonials p, .real-time-winner p {
-            height: 1.5em; /* 固定高さにして揺れないように */
+            height: 1.5em;
             display: none;
             transition: opacity 1s ease-in-out;
         }
         .real-time-winner p {
             font-weight: bold;
             animation: slide-up 2s ease infinite;
+            display: block;
         }
         @keyframes slide-up {
             0% { transform: translateY(100%); opacity: 0; }
@@ -212,7 +215,6 @@
                 scrollToCenter("final-message");
                 revealStep++;
                 
-                // Show the "Next" button only if there are more messages to show
                 if (revealStep < messages.length) {
                     nextButton.style.display = "inline-block";
                 } else {
@@ -221,7 +223,6 @@
             }
         }
 
-        // 当選者の声の表示アニメーション
         const testimonials = document.querySelectorAll(".testimonials p");
         let testimonialIndex = 0;
         setInterval(() => {
@@ -231,7 +232,6 @@
             testimonialIndex = (testimonialIndex + 1) % testimonials.length;
         }, 3000);
 
-        // リアルタイム当選報告の表示更新
         const winnerNotification = document.getElementById("winner-notification");
         const prefectures = ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"];
         const initials = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
