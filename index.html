@@ -36,7 +36,6 @@
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
             text-align: center;
-            animation: fadeIn 1.5s ease-out;
             margin-top: 100px;
         }
         h1 {
@@ -44,14 +43,12 @@
             font-weight: 700;
             color: #333;
             margin-bottom: 20px;
-            animation: fadeInUp 1s ease-out;
         }
         .description {
             font-size: 18px;
             color: #666;
             line-height: 1.6;
             margin-bottom: 30px;
-            animation: fadeInUp 1.2s ease-out;
         }
         .invitation-info {
             font-size: 16px;
@@ -62,7 +59,6 @@
             background: #f9f9f9;
             border-radius: 8px;
             font-weight: 700;
-            animation: fadeInUp 1.2s ease-out;
         }
         .start-button, .popup-button {
             padding: 12px 30px;
@@ -75,7 +71,6 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
             margin-top: 20px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            animation: pulse 1.5s infinite;
         }
         .start-button:hover, .popup-button:hover {
             background-color: #555;
@@ -86,37 +81,6 @@
             color: #444;
             margin-top: 30px;
             display: none;
-            animation: fadeInUp 1s ease-out;
-        }
-        /* アニメーション */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-        .highlight {
-            color: #000;
-            font-weight: bold;
-        }
-        /* 動きのある背景の粒子 */
-        .particle {
-            position: absolute;
-            top: -50px;
-            width: 8px;
-            height: 8px;
-            background: #333;
-            opacity: 0.8;
-            border-radius: 50%;
-            animation: float 5s infinite ease-in-out;
-            box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-        }
-        @keyframes float {
-            0% { transform: translateY(0) scale(1); opacity: 0.8; }
-            50% { transform: translateY(200px) scale(1.2); opacity: 0.5; }
-            100% { transform: translateY(400px) scale(1); opacity: 0; }
         }
     </style>
 </head>
@@ -146,25 +110,7 @@
         <p id="final-message"></p>
     </div>
 
-    <!-- パーティクル背景のためのJavaScript -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            for (let i = 0; i < 50; i++) {
-                createParticle();
-            }
-        });
-
-        function createParticle() {
-            const particle = document.createElement("div");
-            particle.classList.add("particle");
-            particle.style.left = Math.random() * window.innerWidth + "px";
-            particle.style.animationDuration = 2 + Math.random() * 3 + "s";
-            particle.style.animationDelay = Math.random() * 5 + "s";
-            document.body.appendChild(particle);
-
-            setTimeout(() => { particle.remove(); }, 8000);
-        }
-
         let revealStep = 0;
 
         function startLottery() {
@@ -209,6 +155,7 @@
                 revealStep++;
             } else if (revealStep === 2) {
                 finalMessage.innerText = "莉緒が2025年6月にお姉さんになります！";
+                revealStep++;
             }
         }
     </script>
