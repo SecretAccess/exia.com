@@ -98,32 +98,27 @@
         .secondary-button:hover {
             color: #555;
         }
-        .testimonials-container, .real-time-winner-container {
-            margin-top: 30px;
-            padding: 20px;
-            background: #f9f9f9;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 100%;
-            max-width: 600px;
-        }
-        .testimonials-container h2, .real-time-winner-container h2 {
-            font-size: 20px;
-            color: #333;
-            margin-bottom: 15px;
-        }
-        .testimonial, .real-time-winner {
-            font-size: 16px;
-            color: #555;
-            display: none;
-        }
-        .testimonial.active, .real-time-winner.active {
-            display: block;
-        }
         @keyframes pulse {
             0% { box-shadow: 0 0 8px rgba(50, 50, 50, 0.1); }
             100% { box-shadow: 0 0 12px rgba(50, 50, 50, 0.3); }
+        }
+        .testimonials, .real-time-winner {
+            margin-top: 30px;
+            font-size: 16px;
+            color: #333;
+        }
+        .testimonials p {
+            display: none;
+            transition: opacity 1s ease-in-out;
+        }
+        .real-time-winner p {
+            font-weight: bold;
+            animation: slide-up 2s ease infinite;
+        }
+        @keyframes slide-up {
+            0% { transform: translateY(100%); opacity: 0; }
+            50% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100%); opacity: 0; }
         }
     </style>
 </head>
@@ -145,31 +140,36 @@
         <p id="result"></p>
         <div id="popup">
             <p id="popup-message">特別な情報が見つかりました。<br>次のステップに進みますか？</p>
-            <button class="highlight-button" onclick="revealNextStep(true)">はい</button>
-            <button class="secondary-button" onclick="revealNextStep(false)">いいえ</button>
+            <button class="highlight-button" onclick="revealNextStep()">はい</button>
+            <button class="secondary-button">いいえ</button>
         </div>
 
         <p id="final-message"></p>
     </div>
 
-    <!-- 当選者の声セクション -->
-    <div class="testimonials-container">
+    <!-- 当選者の声 -->
+    <div class="testimonials">
         <h2>当選者の声</h2>
-        <p class="testimonial active">"このキャンペーンで当選できて本当に嬉しいです！また参加したいです。" - M・Yさん</p>
-        <p class="testimonial">"運営の方々に感謝！信じられない金額が手に入りました！" - T・Sさん</p>
-        <p class="testimonial">"信じて応募してよかったです。ありがとうございました！" - K・Hさん</p>
-        <p class="testimonial">"まさか自分が当選するとは思いませんでした！夢のようです。" - A・Oさん</p>
-        <p class="testimonial">"親切な対応で安心して参加できました。最高の体験です！" - Y・Nさん</p>
+        <p>“最高のキャンペーンです！” - S・Mさん</p>
+        <p>“30万円が当たるなんて信じられません！” - K・Tさん</p>
+        <p>“このチャンスを掴めて良かったです！” - M・Aさん</p>
+        <p>“迅速で丁寧な対応、最高です！” - R・Yさん</p>
+        <p>“このキャンペーンは本当に素晴らしいです！” - Y・Nさん</p>
     </div>
 
-    <!-- リアルタイム当選報告セクション -->
-    <div class="real-time-winner-container">
+    <!-- リアルタイム当選報告 -->
+    <div class="real-time-winner">
         <h2>リアルタイム当選報告</h2>
-        <p class="real-time-winner active"></p>
+        <p id="winner-notification">埼玉県・S・Aさん 30万円当選しました！<br>12時34分56秒</p>
     </div>
 
     <script>
         let revealStep = 0;
+        const messages = [
+            "実は2025年6月に…",
+            "実は莉緒が2025年6月に…",
+            "莉緒が2025年6月にお姉さんになります！"
+        ];
 
         function scrollToCenter(elementId) {
             document.getElementById(elementId).scrollIntoView({ behavior: "smooth", block: "center" });
@@ -194,58 +194,39 @@
             }, 3000);
         }
 
-        function revealNextStep(isInterested) {
+        function revealNextStep() {
             const finalMessage = document.getElementById("final-message");
-            const popup = document.getElementById("popup");
-            const popupMessage = document.getElementById("popup-message");
 
-            if (!isInterested && revealStep === 0) {
-                popupMessage.innerText = "本当にいいんですか？";
-                return;
-            }
-
-            if (revealStep === 0) {
-                popup.style.display = "none";
-                finalMessage.innerText = "実は2025年6月に…";
+            if (revealStep < messages.length) {
+                finalMessage.innerText = messages[revealStep];
                 finalMessage.style.display = "block";
                 scrollToCenter("final-message");
                 revealStep++;
-                setTimeout(() => revealNextStep(true), 1500);
-            } else if (revealStep === 1) {
-                finalMessage.innerText = "実は莉緒が2025年6月に…";
-                scrollToCenter("final-message");
-                revealStep++;
-                setTimeout(() => revealNextStep(true), 1500);
-            } else if (revealStep === 2) {
-                finalMessage.innerText = "莉緒が2025年6月にお姉さんになります！";
-                scrollToCenter("final-message");
-                revealStep++;
             }
         }
 
-        // 当選者の声のスライド切り替え
-        const testimonials = document.querySelectorAll(".testimonial");
+        // 当選者の声の表示アニメーション
+        const testimonials = document.querySelectorAll(".testimonials p");
         let testimonialIndex = 0;
         setInterval(() => {
-            testimonials[testimonialIndex].classList.remove("active");
+            testimonials.forEach((testimonial, index) => {
+                testimonial.style.display = index === testimonialIndex ? "block" : "none";
+            });
             testimonialIndex = (testimonialIndex + 1) % testimonials.length;
-            testimonials[testimonialIndex].classList.add("active");
         }, 3000);
 
-        // リアルタイム当選報告の更新
-        const realTimeWinner = document.querySelector(".real-time-winner");
+        // リアルタイム当選報告の表示更新
+        const winnerNotification = document.getElementById("winner-notification");
         const prefectures = ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"];
         const initials = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-        function updateRealTimeWinner() {
+        setInterval(() => {
             const randomPrefecture = prefectures[Math.floor(Math.random() * prefectures.length)];
             const randomInitial = `${initials[Math.floor(Math.random() * initials.length)]}・${initials[Math.floor(Math.random() * initials.length)]}`;
             const currentTime = new Date();
-            const timeString = currentTime.toLocaleTimeString('ja-JP');
-            realTimeWinner.innerHTML = `${randomPrefecture}・${randomInitial}さん<br>30万円当選しました！<br>${timeString}`;
-        }
-
-        setInterval(updateRealTimeWinner, 2400);
+            const timeString = `${currentTime.getHours()}時${String(currentTime.getMinutes()).padStart(2, "0")}分${String(currentTime.getSeconds()).padStart(2, "0")}秒`;
+            winnerNotification.innerHTML = `${randomPrefecture}・${randomInitial}さん 30万円当選しました！<br>${timeString}`;
+        }, 2400);
     </script>
 </body>
 </html>
