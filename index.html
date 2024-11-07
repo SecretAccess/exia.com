@@ -6,7 +6,7 @@
     <title>30万円プレゼントキャンペーン - 招待専用</title>
     <style>
         body {
-            background: linear-gradient(135deg, #ffffff, #f2f2f2);
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
             color: #333;
             font-family: "Arial", sans-serif;
             margin: 0;
@@ -22,7 +22,7 @@
             width: 100%;
             height: 250px;
             background: url('28e35337-acb5-415d-894a-9b901a0831e7.jpg') center/cover no-repeat;
-            filter: grayscale(100%) brightness(0.7); /* モノクロ調で背景と馴染ませる */
+            filter: grayscale(100%) brightness(0.7);
             position: absolute;
             top: 0;
             left: 0;
@@ -32,11 +32,12 @@
         .container {
             max-width: 600px;
             padding: 30px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
             text-align: center;
             animation: fadeIn 1.5s ease-out;
+            margin-top: 100px;
         }
         h1 {
             font-size: 36px;
@@ -50,6 +51,17 @@
             color: #666;
             line-height: 1.6;
             margin-bottom: 30px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        .invitation-info {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 10px;
+            padding: 5px 0;
+            font-style: italic;
+            background: #f9f9f9;
+            border-radius: 8px;
+            font-weight: 700;
             animation: fadeInUp 1.2s ease-out;
         }
         .start-button, .popup-button {
@@ -112,6 +124,9 @@
     <div class="top-image"></div>
 
     <div class="container">
+        <div class="invitation-info">
+            招待者限定キャンペーン<br>招待者: 日下望史
+        </div>
         <h1>30万プレゼント<br>キャンペーン</h1>
         <p class="description">
             特別な招待キャンペーンで、抽選で<b class="highlight">30万円</b>が当たるチャンス。今すぐ抽選をスタートして、豪華賞金を手に入れましょう。
@@ -123,7 +138,7 @@
         <p id="loading">特別な情報を検索中です...</p>
 
         <div id="popup">
-            <p id="popup-message">あなただけの特別な情報が見つかりました。次のステップに進みますか？</p>
+            <p id="popup-message">特別な情報が見つかりました。次のステップに進みますか？</p>
             <button class="popup-button" onclick="revealNextStep(true)">はい</button>
             <button class="popup-button" onclick="revealNextStep(false)">いいえ</button>
         </div>
