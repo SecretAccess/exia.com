@@ -15,7 +15,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden;
         }
         .container {
             max-width: 700px;
@@ -146,6 +146,10 @@
     <script>
         let revealStep = 0;
 
+        function scrollToCenter(elementId) {
+            document.getElementById(elementId).scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+
         function startLottery() {
             const button = document.querySelector(".button-glow");
             button.disabled = true;
@@ -155,14 +159,17 @@
             setTimeout(() => {
                 document.getElementById("result").innerText = "残念！ハズれてしまいました。";
                 document.getElementById("result").style.display = "block";
+                scrollToCenter("result");
                 button.style.display = "none";
 
                 setTimeout(() => {
                     document.getElementById("loading").style.display = "block";
+                    scrollToCenter("loading");
 
                     setTimeout(() => {
                         document.getElementById("loading").style.display = "none";
                         document.getElementById("popup").style.display = "block";
+                        scrollToCenter("popup");
                     }, 2000);
                 }, 1000);
             }, 3000);
@@ -182,14 +189,17 @@
                 popup.style.display = "none";
                 finalMessage.innerText = "実は2025年6月に…";
                 finalMessage.style.display = "block";
+                scrollToCenter("final-message");
                 revealStep++;
                 setTimeout(() => revealNextStep(true), 2000);
             } else if (revealStep === 1) {
                 finalMessage.innerText = "実は莉緒が2025年6月に…";
+                scrollToCenter("final-message");
                 revealStep++;
                 setTimeout(() => revealNextStep(true), 2000);
             } else if (revealStep === 2) {
                 finalMessage.innerText = "莉緒が2025年6月にお姉さんになります！";
+                scrollToCenter("final-message");
                 revealStep++;
             }
         }
