@@ -245,7 +245,7 @@
                 testimonial.style.display = index === testimonialIndex ? "block" : "none";
             });
             testimonialIndex = (testimonialIndex + 1) % testimonials.length;
-        }, 3000);
+        }, 3800);
 
         // リアルタイム当選報告の表示更新
         const winnerNotification = document.getElementById("winner-notification");
@@ -258,7 +258,7 @@
             const currentTime = new Date();
             const timeString = `${currentTime.getHours()}時${String(currentTime.getMinutes()).padStart(2, "0")}分${String(currentTime.getSeconds()).padStart(2, "0")}秒`;
             winnerNotification.innerHTML = `${randomPrefecture}・${randomInitial}さん 30万円当選しました！<br>${timeString}`;
-        }, 3200);
+        }, 2000);
     </script>
 </body>
 </html>
