@@ -100,37 +100,64 @@
         }
         .testimonial-section {
             margin-top: 40px;
+            padding: 20px;
+            background: #f7f7f7;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
         .testimonial-title {
-            font-size: 20px;
-            color: #333;
-            margin-bottom: 10px;
+            font-size: 22px;
+            color: #222;
+            font-weight: bold;
+            margin-bottom: 15px;
         }
-        .testimonial {
+        .testimonial-content {
             font-size: 16px;
             color: #555;
-            background-color: #f9f9f9;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            line-height: 1.5;
+            padding: 15px 20px;
+            border-left: 4px solid #444;
+            background-color: #ffffff;
+            border-radius: 6px;
+            display: inline-block;
+            max-width: 80%;
+            margin-bottom: 10px;
+            position: relative;
         }
-        .testimonial p {
-            margin: 0;
+        .testimonial-content::before {
+            content: "“";
+            font-size: 30px;
+            color: #aaa;
+            position: absolute;
+            left: -20px;
+            top: -10px;
         }
-        .testimonial .name {
+        .name {
             margin-top: 10px;
             font-weight: bold;
             color: #333;
         }
+        .real-time-winner-section {
+            margin-top: 30px;
+            padding: 15px;
+            background: #e0e0e0;
+            border-radius: 8px;
+            text-align: center;
+        }
         .real-time-winner {
-            font-size: 14px;
-            color: #666;
-            margin-top: 15px;
+            font-size: 15px;
+            color: #444;
+            margin-top: 8px;
+            animation: fadeIn 2.4s ease-in-out infinite alternate;
         }
         @keyframes pulse {
             0% { box-shadow: 0 0 8px rgba(50, 50, 50, 0.1); }
             100% { box-shadow: 0 0 12px rgba(50, 50, 50, 0.3); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
@@ -162,10 +189,14 @@
     <!-- 当選者の声セクション -->
     <div class="testimonial-section">
         <h2 class="testimonial-title">当選者の声</h2>
-        <div class="testimonial" id="testimonial">
-            <p id="testimonial-text">"運営の対応が素晴らしいです！このキャンペーンのおかげで夢がかないました！"</p>
+        <div class="testimonial-content" id="testimonial">
+            <p id="testimonial-text">運営の対応が素晴らしいです！このキャンペーンのおかげで夢がかないました！</p>
             <p class="name" id="testimonial-name">- T.K. さん</p>
         </div>
+    </div>
+
+    <!-- リアルタイム当選報告セクション -->
+    <div class="real-time-winner-section">
         <div class="real-time-winner" id="real-time-winner">東京都・S.K.さん 30万円当選しました！ 12時34分56秒</div>
     </div>
 
@@ -226,10 +257,10 @@
 
         const testimonials = [
             { text: "運営の対応が素晴らしいです！このキャンペーンのおかげで夢がかないました！", name: "T.K. さん" },
-            { text: "信頼できる運営で安心しました。30万円を受け取れた時の感動は忘れません。", name: "M.Y. さん" },
-            { text: "丁寧な対応と迅速な連絡、運営の皆さんには感謝しかありません！", name: "S.A. さん" },
-            { text: "このキャンペーンのおかげで新しい一歩を踏み出せました！運営に感謝です！", name: "R.N. さん" },
-            { text: "こんな素敵な機会を提供してくれてありがとうございます！運営さん最高！", name: "K.O. さん" }
+            { text: "こんな機会をいただき本当にありがとうございます！", name: "S.M. さん" },
+            { text: "運営のサポートが最高です！今後も応援します！", name: "Y.A. さん" },
+            { text: "期待以上のサービス！運営の皆様、感謝しています！", name: "H.K. さん" },
+            { text: "素晴らしい経験をありがとうございます！", name: "R.N. さん" }
         ];
 
         let testimonialIndex = 0;
