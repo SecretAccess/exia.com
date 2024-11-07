@@ -15,6 +15,7 @@
             justify-content: center;
             min-height: 100vh;
             padding: 20px;
+            flex-direction: column;
         }
         .container {
             max-width: 600px;
@@ -23,9 +24,10 @@
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
             text-align: center;
+            margin-bottom: 40px;
         }
         .top-image img {
-            width: 100%; /* 画像サイズを大きく設定 */
+            width: 90%;
             margin: 0 auto 20px;
             display: block;
             opacity: 0.9;
@@ -96,6 +98,23 @@
         .secondary-button:hover {
             color: #555;
         }
+        .testimonial {
+            font-size: 16px;
+            color: #555;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .testimonial p {
+            margin: 0;
+        }
+        .testimonial .name {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #333;
+        }
         @keyframes pulse {
             0% { box-shadow: 0 0 8px rgba(50, 50, 50, 0.1); }
             100% { box-shadow: 0 0 12px rgba(50, 50, 50, 0.3); }
@@ -110,7 +129,7 @@
         <div class="invitation-info">
             招待者限定キャンペーン<br>招待者: N・K様
         </div>
-        <h1>30万円プレゼント<br>キャンペーン</h1>
+        <h1>30万円プレゼントキャンペーン</h1>
         <p class="description">
             特別な招待を受けた方のみが参加可能なキャンペーンです。<br>抽選で<b>30万円</b>を贈呈いたします。さっそく抽選をスタートし、<br>幸運を引き寄せてください。
         </p>
@@ -125,6 +144,12 @@
         </div>
 
         <p id="final-message"></p>
+    </div>
+
+    <!-- 当選者の声 -->
+    <div class="testimonial" id="testimonial">
+        <p id="testimonial-text">"運営の対応が素晴らしいです！このキャンペーンのおかげで夢がかないました！"</p>
+        <p class="name" id="testimonial-name">- T.K. さん</p>
     </div>
 
     <script>
@@ -176,11 +201,35 @@
                 revealStep++;
                 setTimeout(() => revealNextStep(true), 1500);
             } else if (revealStep === 2) {
-                finalMessage.innerText = "莉緒が2025年6月に<br>お姉さんになります！";
+                finalMessage.innerText = "莉緒が2025年6月にお姉さんになります！";
                 scrollToCenter("final-message");
                 revealStep++;
             }
         }
+
+        // 当選者の声データ
+        const testimonials = [
+            { text: "運営の対応が素晴らしいです！このキャンペーンのおかげで夢がかないました！", name: "T.K. さん" },
+            { text: "信頼できる運営で安心しました。30万円を受け取れた時の感動は忘れません。", name: "M.Y. さん" },
+            { text: "丁寧な対応と迅速な連絡、運営の皆さんには感謝しかありません！", name: "S.A. さん" },
+            { text: "このキャンペーンは信じられないほど魅力的です！当選したことが信じられません。", name: "K.N. さん" },
+            { text: "運営がとても親切で信頼できました。抽選を楽しむことができました！", name: "R.U. さん" }
+        ];
+
+        let testimonialIndex = 0;
+
+        function updateTestimonial() {
+            const testimonialText = document.getElementById("testimonial-text");
+            const testimonialName = document.getElementById("testimonial-name");
+
+            testimonialText.innerText = `"${testimonials[testimonialIndex].text}"`;
+            testimonialName.innerText = `- ${testimonials[testimonialIndex].name}`;
+
+            testimonialIndex = (testimonialIndex + 1) % testimonials.length;
+        }
+
+        // 5秒ごとに当選者の声を切り替え
+        setInterval(updateTestimonial, 2000);
     </script>
 </body>
 </html>
