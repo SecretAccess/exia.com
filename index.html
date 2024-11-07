@@ -65,7 +65,7 @@
         .button-primary:hover {
             background-color: #444;
         }
-        #result, #popup, #final-message {
+        #result, #popup, #final-message, #next-button {
             font-size: 18px;
             color: #444;
             margin-top: 20px;
@@ -107,6 +107,11 @@
             font-size: 16px;
             color: #333;
         }
+        .testimonials h2, .real-time-winner h2 {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 10px;
+        }
         .testimonials p {
             display: none;
             transition: opacity 1s ease-in-out;
@@ -145,6 +150,7 @@
         </div>
 
         <p id="final-message"></p>
+        <button id="next-button" class="highlight-button" onclick="revealNextStep()">次へ</button>
     </div>
 
     <!-- 当選者の声 -->
@@ -196,12 +202,20 @@
 
         function revealNextStep() {
             const finalMessage = document.getElementById("final-message");
+            const nextButton = document.getElementById("next-button");
 
             if (revealStep < messages.length) {
                 finalMessage.innerText = messages[revealStep];
                 finalMessage.style.display = "block";
                 scrollToCenter("final-message");
                 revealStep++;
+                
+                // Show the "Next" button only if there are more messages to show
+                if (revealStep < messages.length) {
+                    nextButton.style.display = "inline-block";
+                } else {
+                    nextButton.style.display = "none";
+                }
             }
         }
 
