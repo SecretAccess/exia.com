@@ -6,7 +6,7 @@
     <title>30万円プレゼントキャンペーン - 招待専用</title>
     <style>
         body {
-            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            background-color: #ffffff;
             color: #333;
             font-family: "Arial", sans-serif;
             margin: 0;
@@ -15,109 +15,92 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            overflow-x: hidden;
+            min-height: 100vh;
+            overflow: hidden;
         }
         .top-image {
             width: 100%;
-            height: 250px;
-            background: url('28e35337-acb5-415d-894a-9b901a0831e7.jpg') center/cover no-repeat;
-            filter: grayscale(100%) brightness(0.7);
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: -1;
+            max-width: 80%;
+            margin: 20px auto;
+            background-image: url('28e35337-acb5-415d-894a-9b901a0831e7.jpg');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 150px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         }
         .container {
             max-width: 600px;
             padding: 30px;
-            background: rgba(255, 255, 255, 0.95);
+            background: #f8f8f8;
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
             text-align: center;
-            margin-top: 100px;
         }
         h1 {
-            font-size: 36px;
+            font-size: 28px;
             font-weight: 700;
-            color: #333;
+            color: #222;
             margin-bottom: 20px;
         }
         .description {
             font-size: 18px;
-            color: #666;
+            color: #555;
             line-height: 1.6;
             margin-bottom: 30px;
         }
         .invitation-info {
             font-size: 16px;
             color: #444;
-            margin-bottom: 10px;
-            padding: 5px 0;
+            margin-bottom: 20px;
             font-style: italic;
-            background: #f9f9f9;
+            background: #efefef;
+            padding: 10px;
             border-radius: 8px;
-            font-weight: 700;
         }
         .start-button, .popup-button {
             padding: 12px 30px;
-            font-size: 16px;
+            font-size: 18px;
             color: #fff;
             background-color: #333;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: transform 0.2s ease;
-            margin-top: 20px;
             position: relative;
             overflow: hidden;
+            margin: 10px;
+            transition: background-color 0.3s ease;
         }
         .start-button:before, .popup-button:before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-            transform: rotate(45deg);
-            transition: opacity 0.5s;
-            opacity: 0;
-            pointer-events: none;
-        }
-        .start-button:hover:before, .popup-button:hover:before {
-            opacity: 1;
-            animation: shine 1.5s linear infinite;
-        }
-        @keyframes shine {
-            0% { transform: translate(-50%, -50%) rotate(45deg); }
-            100% { transform: translate(150%, 150%) rotate(45deg); }
-        }
-        .popup-button {
-            background-color: #666;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            color: #fff;
-        }
-        #popup .popup-button {
-            margin-top: 15px;
-            font-size: 18px;
-            border: none;
-            transition: background-color 0.3s ease;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            animation: glow 2s infinite;
         }
         .highlight-button {
-            color: #fff;
-            background: linear-gradient(135deg, #333, #999);
-            animation: highlight-glow 1.5s ease-in-out infinite alternate;
+            background-color: #444;
+            font-weight: bold;
+            animation: button-glow 1.5s ease-in-out infinite alternate;
         }
-        @keyframes highlight-glow {
-            0% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.3); }
-            100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+        @keyframes glow {
+            0% { opacity: 0; }
+            50% { opacity: 0.3; }
+            100% { opacity: 0; }
+        }
+        @keyframes button-glow {
+            0% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.5); }
+            100% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.8); }
         }
         #result, #popup, #final-message, #loading {
             font-size: 20px;
             color: #444;
-            margin-top: 30px;
+            margin-top: 20px;
             display: none;
         }
     </style>
@@ -127,11 +110,11 @@
 
     <div class="container">
         <div class="invitation-info">
-            招待者限定キャンペーン<br>招待者: N・K様
+            招待者限定キャンペーン<br>招待者: 日下望史
         </div>
-        <h1>30万プレゼント<br>キャンペーン</h1>
+        <h1>30万プレゼントキャンペーン</h1>
         <p class="description">
-            特別な招待キャンペーンで、抽選で<b class="highlight">30万円</b>が当たるチャンス。今すぐ抽選をスタートして、豪華賞金を手に入れましょう。
+            特別な招待キャンペーンで、抽選で<b>30万円</b>が当たるチャンス。今すぐ抽選をスタートして、豪華賞金を手に入れましょう。
         </p>
 
         <button class="start-button" onclick="startLottery()">抽選スタート</button>
@@ -188,11 +171,11 @@
                 finalMessage.innerText = "実は2025年6月に…";
                 finalMessage.style.display = "block";
                 revealStep++;
-                setTimeout(() => revealNextStep(true), 2000);  // 2秒後に次のステップを自動表示
+                setTimeout(() => revealNextStep(true), 2000);
             } else if (revealStep === 1) {
                 finalMessage.innerText = "実は莉緒が2025年6月に…";
                 revealStep++;
-                setTimeout(() => revealNextStep(true), 2000);  // 2秒後に次のステップを自動表示
+                setTimeout(() => revealNextStep(true), 2000);
             } else if (revealStep === 2) {
                 finalMessage.innerText = "莉緒が2025年6月にお姉さんになります！";
                 revealStep++;
