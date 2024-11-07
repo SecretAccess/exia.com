@@ -6,126 +6,138 @@
     <title>30万円プレゼントキャンペーン - 招待専用</title>
     <style>
         body {
-            background-color: #ffffff;
-            color: #333;
-            font-family: "Arial", sans-serif;
+            background-color: #f7f7f7;
+            color: #2c2c2c;
+            font-family: "Helvetica Neue", sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             min-height: 100vh;
             overflow: hidden;
         }
-        .top-image {
-            width: 100%;
-            max-width: 80%;
-            margin: 20px auto;
-            background-image: url('28e35337-acb5-415d-894a-9b901a0831e7.jpg');
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 150px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-        }
         .container {
-            max-width: 600px;
-            padding: 30px;
-            background: #f8f8f8;
+            max-width: 700px;
+            background: #ffffff;
+            padding: 40px;
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
             text-align: center;
         }
+        .top-image img {
+            width: 80%;
+            margin: 20px auto;
+            display: block;
+            opacity: 0.9;
+            filter: grayscale(100%) contrast(110%);
+        }
         h1 {
-            font-size: 28px;
-            font-weight: 700;
-            color: #222;
-            margin-bottom: 20px;
+            font-size: 32px;
+            color: #2c2c2c;
+            margin: 20px 0;
+            letter-spacing: 0.5px;
         }
         .description {
             font-size: 18px;
-            color: #555;
-            line-height: 1.6;
+            color: #444;
+            line-height: 1.8;
             margin-bottom: 30px;
         }
         .invitation-info {
-            font-size: 16px;
-            color: #444;
-            margin-bottom: 20px;
-            font-style: italic;
-            background: #efefef;
-            padding: 10px;
-            border-radius: 8px;
+            font-size: 15px;
+            color: #555;
+            background: #e6e6e6;
+            padding: 8px;
+            border-radius: 5px;
+            margin-bottom: 25px;
         }
-        .start-button, .popup-button {
-            padding: 12px 30px;
+        .button-glow {
+            display: inline-block;
+            padding: 14px 28px;
             font-size: 18px;
-            color: #fff;
-            background-color: #333;
+            color: #ffffff;
+            background-color: #2c2c2c;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            margin: 10px;
-            transition: background-color 0.3s ease;
+            transition: transform 0.3s ease;
         }
-        .start-button:before, .popup-button:before {
+        .button-glow:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(44, 44, 44, 0.7);
+        }
+        .button-glow::before {
             content: '';
             position: absolute;
-            top: 0;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
             width: 120%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
-            animation: glow 2s infinite;
+            height: 120%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%) scale(0);
+            border-radius: 50%;
+            transition: transform 0.5s;
         }
-        .highlight-button {
-            background-color: #444;
-            font-weight: bold;
-            animation: button-glow 1.5s ease-in-out infinite alternate;
+        .button-glow:hover::before {
+            transform: translate(-50%, -50%) scale(1);
         }
-        @keyframes glow {
-            0% { opacity: 0; }
-            50% { opacity: 0.3; }
-            100% { opacity: 0; }
-        }
-        @keyframes button-glow {
-            0% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.5); }
-            100% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.8); }
-        }
-        #result, #popup, #final-message, #loading {
+        #result, #loading, #popup, #final-message {
             font-size: 20px;
             color: #444;
-            margin-top: 20px;
+            margin-top: 30px;
             display: none;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        #loading {
+            font-weight: bold;
+            color: #2c2c2c;
+            letter-spacing: 0.05em;
+            animation: blink 1s infinite alternate;
+        }
+        .highlight-button {
+            color: #2c2c2c;
+            background-color: #ddd;
+            animation: pulse 1.5s ease-in-out infinite alternate;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes blink {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 8px rgba(44, 44, 44, 0.2); }
+            100% { box-shadow: 0 0 15px rgba(44, 44, 44, 0.5); }
         }
     </style>
 </head>
 <body>
-    <div class="top-image"></div>
-
     <div class="container">
+        <div class="top-image">
+            <img src="28e35337-acb5-415d-894a-9b901a0831e7.jpg" alt="キャンペーンロゴ">
+        </div>
         <div class="invitation-info">
             招待者限定キャンペーン<br>招待者: 日下望史
         </div>
-        <h1>30万プレゼントキャンペーン</h1>
+        <h1>30万円プレゼントキャンペーン</h1>
         <p class="description">
-            特別な招待キャンペーンで、抽選で<b>30万円</b>が当たるチャンス。今すぐ抽選をスタートして、豪華賞金を手に入れましょう。
+            特別な招待を受けた方のみが参加可能なプレミアムキャンペーンです。<br>抽選で<b>30万円</b>を贈呈いたします。さっそく抽選をスタートし、幸運を引き寄せてください。
         </p>
 
-        <button class="start-button" onclick="startLottery()">抽選スタート</button>
+        <button class="button-glow" onclick="startLottery()">抽選スタート</button>
 
         <p id="result"></p>
-        <p id="loading">特別な情報を検索中です...</p>
+        <p id="loading">特別な情報を検索中...</p>
 
         <div id="popup">
             <p id="popup-message">特別な情報が見つかりました。次のステップに進みますか？</p>
-            <button class="popup-button highlight-button" onclick="revealNextStep(true)">はい</button>
-            <button class="popup-button" onclick="revealNextStep(false)">いいえ</button>
+            <button class="button-glow highlight-button" onclick="revealNextStep(true)">はい</button>
+            <button class="button-glow" onclick="revealNextStep(false)">いいえ</button>
         </div>
 
         <p id="final-message"></p>
@@ -135,9 +147,9 @@
         let revealStep = 0;
 
         function startLottery() {
-            const button = document.querySelector(".start-button");
+            const button = document.querySelector(".button-glow");
             button.disabled = true;
-            button.style.backgroundColor = "#555";
+            button.style.backgroundColor = "#aaa";
             button.innerText = "抽選中...";
 
             setTimeout(() => {
