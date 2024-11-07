@@ -6,63 +6,62 @@
     <title>30万円プレゼントキャンペーン - 招待専用</title>
     <style>
         body {
-            background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
+            background-color: #121212;
             color: #f9f9f9;
-            text-align: center;
             font-family: "Verdana", sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .top-image {
+            padding: 20px 0;
+        }
+        .top-image img {
+            width: 200px;
         }
         .container {
             max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background: rgba(51, 51, 51, 0.9);
-            box-shadow: 0 4px 12px rgba(255, 223, 0, 0.5);
+            margin-top: 20px;
+            padding: 30px;
+            background: #1e1e1e;
             border-radius: 12px;
-            margin-top: 50px;
-            position: relative;
-            z-index: 10;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
         }
         h1 {
-            color: #ffd700;
+            color: #ffffff;
             font-size: 34px;
             margin-bottom: 20px;
-            text-shadow: 1px 1px 6px rgba(255, 223, 0, 0.8);
+            font-weight: bold;
         }
-        .description {
-            font-size: 20px;
-            line-height: 1.6;
+        .description, .invitation-info {
             color: #d3d3d3;
-            margin-bottom: 30px;
+            font-size: 18px;
+            line-height: 1.6;
         }
         .start-button, .next-button, .popup-button {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 20px;
-            color: #fff;
-            background-color: #b8860b;
-            border: 2px solid #ffd700;
-            border-radius: 5px;
+            padding: 12px 25px;
+            font-size: 18px;
+            color: #121212;
+            background-color: #f0f0f0;
+            border: 2px solid #d3d3d3;
+            border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.6);
-            margin: 10px;
+            margin-top: 15px;
         }
         .start-button:hover, .next-button:hover, .popup-button:hover {
-            background-color: #daa520;
+            background-color: #b3b3b3;
             transform: scale(1.05);
         }
         #result, #popup, #final-message, #loading {
-            font-size: 24px;
+            font-size: 20px;
+            color: #f9f9f9;
             margin-top: 30px;
-            color: red;
-            font-weight: bold;
             display: none;
-        }
-        #loading {
-            color: #ffd700;
-            text-shadow: 0px 0px 6px rgba(255, 223, 0, 0.7);
-            animation: blink 1s infinite;
         }
         .highlight {
             color: #ffd700;
@@ -70,51 +69,33 @@
         }
         .official-badge {
             font-size: 14px;
-            color: #333;
-            background: #ffd700;
+            color: #121212;
+            background-color: #ffffff;
             padding: 5px 10px;
             border-radius: 5px;
             display: inline-block;
             margin-bottom: 20px;
             font-weight: bold;
         }
-        /* 紙吹雪のスタイル */
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: gold;
-            animation: confetti-fall linear infinite;
-            z-index: 100;
-        }
-        @keyframes confetti-fall {
-            0% { transform: translateY(-100vh) rotate(0deg); }
-            100% { transform: translateY(100vh) rotate(360deg); }
-        }
         /* 点滅アニメーション */
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
-        /* 招待者情報のスタイル */
-        .invitation-info {
-            font-size: 18px;
-            color: #d3d3d3;
-            margin-bottom: 30px;
-        }
-        .inviter, .invitee {
-            font-weight: bold;
-            color: #ffd700;
-        }
     </style>
 </head>
 <body>
+    <!-- 上部画像 -->
+    <div class="top-image">
+        <img src="28e35337-acb5-415d-894a-9b901a0831e7.jpg" alt="キャンペーン画像">
+    </div>
+    
     <div class="container">
         <div class="official-badge">招待専用キャンペーン</div>
-        <h1>30万プレゼント<br>キャンペーン！</h1>
+        <h1>30万円プレゼント<br>キャンペーン！</h1>
         <p class="invitation-info">
-            招待者: <span class="inviter">日下望史</span><br>
-            被招待者: <span class="invitee">●様</span>
+            招待者: <span class="highlight">日下望史</span><br>
+            被招待者: <span class="highlight">●様</span>
         </p>
         <p class="description">日頃のご愛顧に感謝し、抽選で<b class="highlight">30万円</b>が当たる特別キャンペーンを開催中です！下のボタンをクリックして、運試しをしてみましょう。</p>
 
@@ -139,7 +120,7 @@
         function startLottery() {
             const button = document.querySelector(".start-button");
             button.disabled = true;
-            button.style.backgroundColor = "#555";
+            button.style.backgroundColor = "#333";
             button.innerText = "抽選中...";
 
             setTimeout(() => {
@@ -179,32 +160,9 @@
             } else if (revealStep === 2) {
                 finalMessage.innerText = "莉緒が2025年6月にお姉さんになります！";
                 nextButton.style.display = "none";
-                startConfetti();
             }
 
             revealStep++;
-        }
-
-        function startConfetti() {
-            for (let i = 0; i < 100; i++) {
-                createConfetti();
-            }
-        }
-
-        function createConfetti() {
-            const confetti = document.createElement("div");
-            confetti.classList.add("confetti");
-            confetti.style.left = Math.random() * window.innerWidth + "px";
-            confetti.style.backgroundColor = getRandomColor();
-            confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
-            document.body.appendChild(confetti);
-
-            setTimeout(() => { confetti.remove(); }, 5000);
-        }
-
-        function getRandomColor() {
-            const colors = ["gold", "orange", "red", "green", "blue"];
-            return colors[Math.floor(Math.random() * colors.length)];
         }
     </script>
 </body>
