@@ -64,25 +64,16 @@
             position: relative;
             overflow: hidden;
             transition: transform 0.3s ease;
+            animation: pulse 1.5s ease-in-out infinite alternate;
         }
         .button-glow:hover {
             transform: scale(1.05);
             box-shadow: 0 0 20px rgba(44, 44, 44, 0.7);
         }
-        .button-glow::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 120%;
-            height: 120%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%) scale(0);
-            border-radius: 50%;
-            transition: transform 0.5s;
-        }
-        .button-glow:hover::before {
-            transform: translate(-50%, -50%) scale(1);
+        .highlight-button {
+            color: #2c2c2c;
+            background-color: #ddd;
+            animation: pulse 1s ease-in-out infinite alternate;
         }
         #result, #loading, #popup, #final-message {
             font-size: 20px;
@@ -95,12 +86,19 @@
             font-weight: bold;
             color: #2c2c2c;
             letter-spacing: 0.05em;
-            animation: blink 1s infinite alternate;
+            animation: blink 0.5s infinite alternate;
         }
         .highlight-button {
             color: #2c2c2c;
             background-color: #ddd;
             animation: pulse 1.5s ease-in-out infinite alternate;
+            border: 1px solid #2c2c2c;
+            border-radius: 8px;
+            padding: 15px 30px;
+        }
+        .popup-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(44, 44, 44, 0.6);
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -132,12 +130,12 @@
         <button class="button-glow" onclick="startLottery()">抽選スタート</button>
 
         <p id="result"></p>
-        <p id="loading">特別な情報を検索中...</p>
+        <p id="loading">抽選中です...</p>
 
         <div id="popup">
             <p id="popup-message">特別な情報が見つかりました。次のステップに進みますか？</p>
-            <button class="button-glow highlight-button" onclick="revealNextStep(true)">はい</button>
-            <button class="button-glow" onclick="revealNextStep(false)">いいえ</button>
+            <button class="highlight-button" onclick="revealNextStep(true)">はい</button>
+            <button class="button-glow popup-button" onclick="revealNextStep(false)">いいえ</button>
         </div>
 
         <p id="final-message"></p>
@@ -170,7 +168,7 @@
                         document.getElementById("loading").style.display = "none";
                         document.getElementById("popup").style.display = "block";
                         scrollToCenter("popup");
-                    }, 2000);
+                    }, 1500);
                 }, 1000);
             }, 3000);
         }
