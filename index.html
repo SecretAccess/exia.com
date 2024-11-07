@@ -98,13 +98,21 @@
         .secondary-button:hover {
             color: #555;
         }
+        .testimonial-section {
+            margin-top: 40px;
+        }
+        .testimonial-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
         .testimonial {
             font-size: 16px;
             color: #555;
             background-color: #f9f9f9;
             padding: 15px;
             border-radius: 8px;
-            margin-top: 20px;
+            margin-top: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         .testimonial p {
@@ -114,6 +122,11 @@
             margin-top: 10px;
             font-weight: bold;
             color: #333;
+        }
+        .real-time-winner {
+            font-size: 14px;
+            color: #666;
+            margin-top: 15px;
         }
         @keyframes pulse {
             0% { box-shadow: 0 0 8px rgba(50, 50, 50, 0.1); }
@@ -146,10 +159,14 @@
         <p id="final-message"></p>
     </div>
 
-    <!-- 当選者の声 -->
-    <div class="testimonial" id="testimonial">
-        <p id="testimonial-text">"運営の対応が素晴らしいです！このキャンペーンのおかげで夢がかないました！"</p>
-        <p class="name" id="testimonial-name">- T.K. さん</p>
+    <!-- 当選者の声セクション -->
+    <div class="testimonial-section">
+        <h2 class="testimonial-title">当選者の声</h2>
+        <div class="testimonial" id="testimonial">
+            <p id="testimonial-text">"運営の対応が素晴らしいです！このキャンペーンのおかげで夢がかないました！"</p>
+            <p class="name" id="testimonial-name">- T.K. さん</p>
+        </div>
+        <div class="real-time-winner" id="real-time-winner">東京都・S.K.さん 30万円当選しました！ 12時34分56秒</div>
     </div>
 
     <script>
@@ -207,13 +224,12 @@
             }
         }
 
-        // 当選者の声データ
         const testimonials = [
             { text: "運営の対応が素晴らしいです！このキャンペーンのおかげで夢がかないました！", name: "T.K. さん" },
             { text: "信頼できる運営で安心しました。30万円を受け取れた時の感動は忘れません。", name: "M.Y. さん" },
             { text: "丁寧な対応と迅速な連絡、運営の皆さんには感謝しかありません！", name: "S.A. さん" },
-            { text: "このキャンペーンは信じられないほど魅力的です！当選したことが信じられません。", name: "K.N. さん" },
-            { text: "運営がとても親切で信頼できました。抽選を楽しむことができました！", name: "R.U. さん" }
+            { text: "このキャンペーンのおかげで新しい一歩を踏み出せました！運営に感謝です！", name: "R.N. さん" },
+            { text: "こんな素敵な機会を提供してくれてありがとうございます！運営さん最高！", name: "K.O. さん" }
         ];
 
         let testimonialIndex = 0;
@@ -221,15 +237,26 @@
         function updateTestimonial() {
             const testimonialText = document.getElementById("testimonial-text");
             const testimonialName = document.getElementById("testimonial-name");
-
             testimonialText.innerText = `"${testimonials[testimonialIndex].text}"`;
             testimonialName.innerText = `- ${testimonials[testimonialIndex].name}`;
 
             testimonialIndex = (testimonialIndex + 1) % testimonials.length;
         }
 
-        // 5秒ごとに当選者の声を切り替え
-        setInterval(updateTestimonial, 2000);
+        setInterval(updateTestimonial, 5000);
+
+        const prefectures = ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"];
+        const initials = ["S.K", "T.M", "Y.N", "M.Y", "R.O", "K.T", "A.S", "H.K", "N.Y", "T.R"];
+
+        function updateRealTimeWinner() {
+            const randomPrefecture = prefectures[Math.floor(Math.random() * prefectures.length)];
+            const randomInitial = initials[Math.floor(Math.random() * initials.length)];
+            const now = new Date();
+            const timeString = `${now.getHours()}時${now.getMinutes()}分${now.getSeconds()}秒`;
+            document.getElementById("real-time-winner").innerText = `${randomPrefecture}・${randomInitial}さん 30万円当選しました！ ${timeString}`;
+        }
+
+        setInterval(updateRealTimeWinner, 2400);
     </script>
 </body>
 </html>
