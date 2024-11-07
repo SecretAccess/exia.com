@@ -284,7 +284,8 @@
             const randomInitial = initials[Math.floor(Math.random() * initials.length)];
             const now = new Date();
             const timeString = `${now.getHours()}時${now.getMinutes()}分${now.getSeconds()}秒`;
-            document.getElementById("real-time-winner").innerText = `${randomPrefecture}・${randomInitial}さん 30万円当選しました！ ${timeString}`;
+            document.getElementById("real-time-winner").innerHTML = `${randomPrefecture}・${randomInitial}さん 30万円当選しました！<br>${timeString}`;
+
         }
 
         setInterval(updateRealTimeWinner, 2400);
