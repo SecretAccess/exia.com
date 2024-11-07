@@ -13,9 +13,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
             min-height: 100vh;
             padding: 20px;
-            flex-direction: column;
         }
         .container {
             max-width: 600px;
@@ -24,10 +24,10 @@
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
         .top-image img {
-            width: 90%;
+            width: 70%;
             margin: 0 auto 20px;
             display: block;
             opacity: 0.9;
@@ -98,66 +98,32 @@
         .secondary-button:hover {
             color: #555;
         }
-        .testimonial-section {
-            margin-top: 40px;
+        .testimonials-container, .real-time-winner-container {
+            margin-top: 30px;
             padding: 20px;
-            background: #f7f7f7;
-            border-radius: 8px;
+            background: #f9f9f9;
+            border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             text-align: center;
+            width: 100%;
+            max-width: 600px;
         }
-        .testimonial-title {
-            font-size: 22px;
-            color: #222;
-            font-weight: bold;
+        .testimonials-container h2, .real-time-winner-container h2 {
+            font-size: 20px;
+            color: #333;
             margin-bottom: 15px;
         }
-        .testimonial-content {
+        .testimonial, .real-time-winner {
             font-size: 16px;
             color: #555;
-            line-height: 1.5;
-            padding: 15px 20px;
-            border-left: 4px solid #444;
-            background-color: #ffffff;
-            border-radius: 6px;
-            display: inline-block;
-            max-width: 80%;
-            margin-bottom: 10px;
-            position: relative;
+            display: none;
         }
-        .testimonial-content::before {
-            content: "“";
-            font-size: 30px;
-            color: #aaa;
-            position: absolute;
-            left: -20px;
-            top: -10px;
-        }
-        .name {
-            margin-top: 10px;
-            font-weight: bold;
-            color: #333;
-        }
-        .real-time-winner-section {
-            margin-top: 30px;
-            padding: 15px;
-            background: #e0e0e0;
-            border-radius: 8px;
-            text-align: center;
-        }
-        .real-time-winner {
-            font-size: 15px;
-            color: #444;
-            margin-top: 8px;
-            animation: fadeIn 2.4s ease-in-out infinite alternate;
+        .testimonial.active, .real-time-winner.active {
+            display: block;
         }
         @keyframes pulse {
             0% { box-shadow: 0 0 8px rgba(50, 50, 50, 0.1); }
             100% { box-shadow: 0 0 12px rgba(50, 50, 50, 0.3); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
     </style>
 </head>
@@ -187,17 +153,19 @@
     </div>
 
     <!-- 当選者の声セクション -->
-    <div class="testimonial-section">
-        <h2 class="testimonial-title">当選者の声</h2>
-        <div class="testimonial-content" id="testimonial">
-            <p id="testimonial-text">運営の対応が素晴らしいです！このキャンペーンのおかげで夢がかないました！</p>
-            <p class="name" id="testimonial-name">- T.K. さん</p>
-        </div>
+    <div class="testimonials-container">
+        <h2>当選者の声</h2>
+        <p class="testimonial active">"このキャンペーンで当選できて本当に嬉しいです！また参加したいです。" - M・Yさん</p>
+        <p class="testimonial">"運営の方々に感謝！信じられない金額が手に入りました！" - T・Sさん</p>
+        <p class="testimonial">"信じて応募してよかったです。ありがとうございました！" - K・Hさん</p>
+        <p class="testimonial">"まさか自分が当選するとは思いませんでした！夢のようです。" - A・Oさん</p>
+        <p class="testimonial">"親切な対応で安心して参加できました。最高の体験です！" - Y・Nさん</p>
     </div>
 
     <!-- リアルタイム当選報告セクション -->
-    <div class="real-time-winner-section">
-        <div class="real-time-winner" id="real-time-winner">東京都・S.K.さん 30万円当選しました！ 12時34分56秒</div>
+    <div class="real-time-winner-container">
+        <h2>リアルタイム当選報告</h2>
+        <p class="real-time-winner active"></p>
     </div>
 
     <script>
@@ -255,37 +223,26 @@
             }
         }
 
-        const testimonials = [
-            { text: "運営の対応が素晴らしいです！このキャンペーンのおかげで夢がかないました！", name: "T.K. さん" },
-            { text: "こんな機会をいただき本当にありがとうございます！", name: "S.M. さん" },
-            { text: "運営のサポートが最高です！今後も応援します！", name: "Y.A. さん" },
-            { text: "期待以上のサービス！運営の皆様、感謝しています！", name: "H.K. さん" },
-            { text: "素晴らしい経験をありがとうございます！", name: "R.N. さん" }
-        ];
-
+        // 当選者の声のスライド切り替え
+        const testimonials = document.querySelectorAll(".testimonial");
         let testimonialIndex = 0;
-
-        function updateTestimonial() {
-            const testimonialText = document.getElementById("testimonial-text");
-            const testimonialName = document.getElementById("testimonial-name");
-            testimonialText.innerText = `"${testimonials[testimonialIndex].text}"`;
-            testimonialName.innerText = `- ${testimonials[testimonialIndex].name}`;
-
+        setInterval(() => {
+            testimonials[testimonialIndex].classList.remove("active");
             testimonialIndex = (testimonialIndex + 1) % testimonials.length;
-        }
+            testimonials[testimonialIndex].classList.add("active");
+        }, 3000);
 
-        setInterval(updateTestimonial, 5000);
-
+        // リアルタイム当選報告の更新
+        const realTimeWinner = document.querySelector(".real-time-winner");
         const prefectures = ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"];
-        const initials = ["S.K", "T.M", "Y.N", "M.Y", "R.O", "K.T", "A.S", "H.K", "N.Y", "T.R"];
+        const initials = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         function updateRealTimeWinner() {
             const randomPrefecture = prefectures[Math.floor(Math.random() * prefectures.length)];
-            const randomInitial = initials[Math.floor(Math.random() * initials.length)];
-            const now = new Date();
-            const timeString = `${now.getHours()}時${now.getMinutes()}分${now.getSeconds()}秒`;
-            document.getElementById("real-time-winner").innerHTML = `${randomPrefecture}・${randomInitial}さん 30万円当選しました！<br>${timeString}`;
-
+            const randomInitial = `${initials[Math.floor(Math.random() * initials.length)]}・${initials[Math.floor(Math.random() * initials.length)]}`;
+            const currentTime = new Date();
+            const timeString = currentTime.toLocaleTimeString('ja-JP');
+            realTimeWinner.innerHTML = `${randomPrefecture}・${randomInitial}さん<br>30万円当選しました！<br>${timeString}`;
         }
 
         setInterval(updateRealTimeWinner, 2400);
