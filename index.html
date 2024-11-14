@@ -26,33 +26,7 @@
             text-align: center;
             margin-bottom: 20px;
         }
-        .top-image img {
-            width: 110%;
-            margin: 0 auto 20px;
-            display: block;
-            opacity: 0.9;
-            filter: grayscale(80%) contrast(110%);
-        }
-        h1 {
-            font-size: 26px;
-            color: #222;
-            margin-bottom: 20px;
-        }
-        .description {
-            font-size: 18px;
-            color: #444;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-        .invitation-info {
-            font-size: 15px;
-            color: #666;
-            background: #f9f9f9;
-            padding: 8px;
-            border-radius: 5px;
-            margin-bottom: 25px;
-        }
-        .button-primary {
+        .button-primary, .highlight-button, #next-button {
             padding: 15px 30px;
             font-size: 18px;
             color: #fff;
@@ -60,35 +34,14 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-top: 20px;
             transition: background-color 0.3s;
         }
-        .button-primary:hover {
+        .highlight-button:hover, #next-button:hover {
             background-color: #444;
         }
         #result, #popup, #final-message, #next-button {
-            font-size: 18px;
-            color: #444;
-            margin-top: 20px;
             display: none;
-        }
-        .highlight-button {
-            font-size: 18px;
-            color: #fff;
-            background-color: #333;
-            padding: 12px 24px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.3s;
-            animation: pulse 1.5s ease-in-out infinite alternate;
-        }
-        .highlight-button:hover, #next-button {
-            background-color: #444;
-            transform: scale(1.05);
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 8px rgba(50, 50, 50, 0.1); }
-            100% { box-shadow: 0 0 12px rgba(50, 50, 50, 0.3); }
         }
         .testimonials {
             margin-top: 30px;
@@ -117,26 +70,11 @@
             font-weight: bold;
             animation: slide-up 2s ease infinite;
         }
-        @keyframes slide-up {
-            0% { transform: translateY(100%); opacity: 0; }
-            50% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-100%); opacity: 0; }
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="top-image">
-            <img src="28e35337-acb5-415d-894a-9b901a0831e7.jpg" alt="キャンペーンロゴ">
-        </div>
-        <div class="invitation-info">
-            招待者限定キャンペーン<br>招待者: N・K様
-        </div>
         <h1>30万円プレゼント<br>キャンペーン</h1>
-        <p class="description">
-            特別な招待を受けた方のみが参加可能なキャンペーンです。<br>抽選で<b>30万円</b>を贈呈いたします。さっそく抽選をスタートし、<br>幸運を引き寄せてください。
-        </p>
-
         <button class="button-primary" onclick="startLottery()">抽選スタート</button>
 
         <p id="result"></p>
@@ -146,7 +84,7 @@
         </div>
 
         <p id="final-message"></p>
-        <button id="next-button" class="highlight-button" onclick="revealNextStep()">次へ</button>
+        <button id="next-button" onclick="revealNextStep()">次へ</button>
     </div>
 
     <!-- 当選者の声 -->
@@ -192,9 +130,18 @@
 
         function revealNextStep() {
             const finalMessage = document.getElementById("final-message");
+            const nextButton = document.getElementById("next-button");
+
             if (revealStep < messages.length) {
-                finalMessage.innerText = messages[revealStep++];
+                finalMessage.innerText = messages[revealStep];
                 finalMessage.style.display = "block";
+                nextButton.style.display = "inline-block";
+
+                if (revealStep === messages.length - 1) {
+                    nextButton.style.display = "none";
+                }
+
+                revealStep++;
             }
         }
 
@@ -210,7 +157,7 @@
 
         // リアルタイム当選報告の表示更新
         const winnerNotification = document.getElementById("winner-notification");
-        const prefectures = ["北海道", "埼玉県", "長崎県", "宮城県", "京都府", "青森県", "兵庫県", "兵庫県", "沖縄県", "東京都", "大阪府"];
+        const prefectures = ["北海道", "埼玉県", "長崎県", "宮城県", "京都府", "青森県", "兵庫県", "沖縄県", "東京都", "大阪府"];
         const initials = "AKSTNHMYRW";
         setInterval(() => {
             const randomPrefecture = prefectures[Math.floor(Math.random() * prefectures.length)];
