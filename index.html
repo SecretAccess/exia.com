@@ -49,7 +49,6 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
         }
         .button-primary:hover {
             background-color: #444;
@@ -73,6 +72,36 @@
         .loading-text {
             font-size: 18px;
             color: #666;
+        }
+        .testimonials {
+            margin-top: 30px;
+            text-align: left;
+        }
+        .testimonials h2, .real-time-winner h2 {
+            font-size: 16px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+        .testimonials p {
+            display: none;
+            margin: 5px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        .real-time-winner {
+            margin-top: 30px;
+            text-align: left;
+            font-size: 14px;
+        }
+        .real-time-winner p {
+            font-weight: bold;
+            animation: slide-up 2s ease infinite;
+        }
+        @keyframes slide-up {
+            0% { transform: translateY(100%); opacity: 0; }
+            50% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100%); opacity: 0; }
         }
     </style>
 </head>
@@ -99,24 +128,33 @@
         <p id="final-message"></p>
         <button id="next-button" class="highlight-button" onclick="revealNextStep()">次へ</button>
         <p id="pregnancy-info"></p>
+
+        <!-- 当選者の声 -->
+        <div class="testimonials">
+            <h2>当選者の声</h2>
+            <p>“最高のキャンペーンです！” - S・Mさん</p>
+            <p>“30万円が当たるなんて信じられません！” - K・Tさん</p>
+            <p>“このチャンスを掴めて良かったです！” - M・Aさん</p>
+            <p>“迅速で丁寧な対応、最高です！” - R・Yさん</p>
+            <p>“このキャンペーンは本当に素晴らしいです！” - Y・Nさん</p>
+        </div>
+
+        <!-- リアルタイム当選報告 -->
+        <div class="real-time-winner">
+            <h2>リアルタイム当選報告</h2>
+            <p id="winner-notification">埼玉県・S・Aさん 30万円当選しました！<br>12時34分56秒</p>
+        </div>
     </div>
 
     <script>
         let revealStep = 0;
-        const messages = [
-            "実は2025年6月に…",
-            "莉緒が…",
-            "2025年6月に莉緒が<br>お姉さんになります！"
-        ];
-
-        // 基準日（妊娠10週1日目の開始日）
+        const messages = ["実は2025年6月に…", "莉緒が…", "2025年6月に莉緒が<br>お姉さんになります！"];
         const startDate = new Date("2024-11-14");
         const dueDate = new Date("2025-06-11");
 
         function startLottery() {
             const button = document.querySelector(".button-primary");
             button.disabled = true;
-            button.style.backgroundColor = "#aaa";
             button.innerText = "結果を確認中...";
             document.getElementById("loading").style.display = "block";
 
@@ -124,28 +162,20 @@
                 document.getElementById("loading").style.display = "none";
                 document.getElementById("result").innerText = "残念！外れてしまいました。";
                 document.getElementById("result").style.display = "block";
-
-                setTimeout(() => {
-                    document.getElementById("popup").style.display = "block";
-                }, 1000);
+                setTimeout(() => document.getElementById("popup").style.display = "block", 1000);
             }, 3000);
         }
 
         function revealNextStep() {
             const finalMessage = document.getElementById("final-message");
-            const nextButton = document.getElementById("next-button");
-            const yesButton = document.getElementById("yes-button");
             const pregnancyInfo = document.getElementById("pregnancy-info");
+            const yesButton = document.getElementById("yes-button");
 
-            // 「はい」ボタンを非表示にする
             yesButton.style.display = "none";
-
             if (revealStep < messages.length) {
                 finalMessage.innerHTML = messages[revealStep];
                 finalMessage.style.display = "block";
                 revealStep++;
-
-                // 最後のメッセージで「次へ」ボタンを非表示にし、妊娠情報を表示
                 if (revealStep === messages.length) {
                     const today = new Date();
                     const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
@@ -153,15 +183,18 @@
                     const currentWeek = Math.floor(totalDays / 7);
                     const currentDay = totalDays % 7;
                     const daysUntilDueDate = Math.floor((dueDate - today) / (1000 * 60 * 60 * 24));
-
                     pregnancyInfo.innerHTML = `現在 <strong>${currentWeek}週${currentDay}日</strong>、<br>予定日まであと <strong>${daysUntilDueDate}日</strong> です。`;
                     pregnancyInfo.style.display = "block";
-                    nextButton.style.display = "none";
-                } else {
-                    nextButton.style.display = "inline-block";
                 }
             }
         }
+
+        const testimonials = document.querySelectorAll(".testimonials p");
+        let index = 0;
+        setInterval(() => {
+            testimonials.forEach((t, i) => t.style.display = i === index ? "block" : "none");
+            index = (index + 1) % testimonials.length;
+        }, 3800);
     </script>
 </body>
 </html>
