@@ -1,3 +1,5 @@
+できた　ありがとう
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -24,51 +26,163 @@
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
             text-align: center;
+            margin-bottom: 20px;
         }
-        .highlight-button {
-            padding: 12px 24px;
+        .top-image img {
+            width: 110%;
+            margin: 0 auto 20px;
+            display: block;
+            opacity: 0.9;
+            filter: grayscale(80%) contrast(110%);
+        }
+        h1 {
+            font-size: 26px;
+            color: #222;
+            margin-bottom: 20px;
+        }
+        .description {
+            font-size: 18px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .invitation-info {
+            font-size: 15px;
+            color: #666;
+            background: #f9f9f9;
+            padding: 8px;
+            border-radius: 5px;
+            margin-bottom: 25px;
+        }
+        .button-primary {
+            padding: 15px 30px;
+            font-size: 18px;
             color: #fff;
             background-color: #333;
+            border: none;
             border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
-        #pregnancy-info {
+        .button-primary:hover {
+            background-color: #444;
+        }
+        #result, #popup, #final-message, #next-button {
             font-size: 18px;
             color: #444;
             margin-top: 20px;
             display: none;
         }
+        .highlight-button {
+            font-size: 18px;
+            color: #fff;
+            background-color: #333;
+            padding: 12px 24px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s;
+            animation: pulse 1.5s ease-in-out infinite alternate;
+        }
+        .highlight-button:hover, #next-button {
+            background-color: #444;
+            transform: scale(1.05);
+        }
+        #next-button {
+            color: #fff;
+        }
+        .secondary-button {
+            font-size: 18px;
+            color: #777;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            margin-left: 20px;
+            padding: 0;
+            transition: color 0.3s;
+        }
+        .secondary-button:hover {
+            color: #555;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 8px rgba(50, 50, 50, 0.1); }
+            100% { box-shadow: 0 0 12px rgba(50, 50, 50, 0.3); }
+        }
+        .testimonials {
+            margin-top: 30px;
+            text-align: left;
+        }
+        .testimonials h2, .real-time-winner h2 {
+            font-size: 16px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+        .testimonials p {
+            display: none;
+            margin: 5px 0;
+            transition: opacity 1s ease-in-out;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 8px;
+            position: relative;
+        }
+        .real-time-winner {
+            margin-top: 30px;
+            text-align: left;
+            font-size: 14px;
+            color: #333;
+        }
+        .real-time-winner p {
+            font-weight: bold;
+            animation: slide-up 2s ease infinite;
+        }
+        @keyframes slide-up {
+            0% { transform: translateY(100%); opacity: 0; }
+            50% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100%); opacity: 0; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>30万円プレゼントキャンペーン</h1>
+        <div class="top-image">
+            <img src="28e35337-acb5-415d-894a-9b901a0831e7.jpg" alt="キャンペーンロゴ">
+        </div>
+        <div class="invitation-info">
+            招待者限定キャンペーン<br>招待者: N・K様
+        </div>
+        <h1>30万円プレゼント<br>キャンペーン</h1>
+        <p class="description">
+            特別な招待を受けた方のみが参加可能なキャンペーンです。<br>抽選で<b>30万円</b>を贈呈いたします。さっそく抽選をスタートし、<br>幸運を引き寄せてください。
+        </p>
+
         <button class="button-primary" onclick="startLottery()">抽選スタート</button>
 
         <p id="result"></p>
         <div id="popup">
             <p id="popup-message">特別な情報が見つかりました。<br>次のステップに進みますか？</p>
             <button class="highlight-button" onclick="revealNextStep()">はい</button>
+            <button class="secondary-button" onclick="confirmAgain()">いいえ</button>
         </div>
 
         <p id="final-message"></p>
         <button id="next-button" class="highlight-button" onclick="revealNextStep()">次へ</button>
-        <p id="pregnancy-info"></p>
+    </div>
 
-        <!-- 当選者の声 -->
-        <div class="testimonials">
-            <h2>当選者の声</h2>
-            <p>“最高のキャンペーンです！” - S・Mさん</p>
-            <p>“30万円が当たるなんて信じられません！” - K・Tさん</p>
-            <p>“このチャンスを掴めて良かったです！” - M・Aさん</p>
-            <p>“迅速で丁寧な対応、最高です！” - R・Yさん</p>
-            <p>“このキャンペーンは本当に素晴らしいです！” - Y・Nさん</p>
-        </div>
+    <!-- 当選者の声 -->
+    <div class="testimonials">
+        <h2>当選者の声</h2>
+        <p>“最高のキャンペーンです！” - S・Mさん</p>
+        <p>“30万円が当たるなんて信じられません！” - K・Tさん</p>
+        <p>“このチャンスを掴めて良かったです！” - M・Aさん</p>
+        <p>“迅速で丁寧な対応、最高です！” - R・Yさん</p>
+        <p>“このキャンペーンは本当に素晴らしいです！” - Y・Nさん</p>
+    </div>
 
-        <!-- リアルタイム当選報告 -->
-        <div class="real-time-winner">
-            <h2>リアルタイム当選報告</h2>
-            <p id="winner-notification">埼玉県・S・Aさん 30万円当選しました！<br>12時34分56秒</p>
-        </div>
+    <!-- リアルタイム当選報告 -->
+    <div class="real-time-winner">
+        <h2>リアルタイム当選報告</h2>
+        <p id="winner-notification">埼玉県・S・Aさん 30万円当選しました！<br>12時34分56秒</p>
     </div>
 
     <script>
@@ -79,55 +193,73 @@
             "2025年6月に莉緒がお姉さんになります！"
         ];
 
-        const startDate = new Date("2024-11-14");
-        const dueDate = new Date("2025-06-11");
+        function scrollToCenter(elementId) {
+            document.getElementById(elementId).scrollIntoView({ behavior: "smooth", block: "center" });
+        }
 
         function startLottery() {
             const button = document.querySelector(".button-primary");
             button.disabled = true;
+            button.style.backgroundColor = "#aaa";
             button.innerText = "結果を確認中...";
 
             setTimeout(() => {
                 document.getElementById("result").innerText = "残念！ハズれてしまいました。";
                 document.getElementById("result").style.display = "block";
-                setTimeout(() => document.getElementById("popup").style.display = "block", 1000);
+                scrollToCenter("result");
+                button.style.display = "none";
+
+                setTimeout(() => {
+                    document.getElementById("popup").style.display = "block";
+                    scrollToCenter("popup");
+                }, 1000);
             }, 3000);
         }
 
         function revealNextStep() {
             const finalMessage = document.getElementById("final-message");
-            const pregnancyInfo = document.getElementById("pregnancy-info");
+            const nextButton = document.getElementById("next-button");
 
             if (revealStep < messages.length) {
                 finalMessage.innerText = messages[revealStep];
                 finalMessage.style.display = "block";
+                scrollToCenter("final-message");
                 revealStep++;
-
-                if (revealStep === messages.length) {
-                    const today = new Date();
-                    const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
-                    const totalDays = 10 * 7 + 1 + daysPassed;
-                    const currentWeek = Math.floor(totalDays / 7);
-                    const currentDay = totalDays % 7;
-                    const daysUntilDueDate = Math.floor((dueDate - today) / (1000 * 60 * 60 * 24));
-
-                    pregnancyInfo.innerHTML = `現在 <strong>${currentWeek}週${currentDay}日</strong>、<br>予定日まであと <strong>${daysUntilDueDate}日</strong> です。`;
-                    pregnancyInfo.style.display = "block";
+                
+                if (revealStep < messages.length) {
+                    nextButton.style.display = "inline-block";
+                } else {
+                    nextButton.style.display = "none";
                 }
             }
         }
 
-        // リアルタイム当選報告の更新
+        function confirmAgain() {
+            const popupMessage = document.getElementById("popup-message");
+            popupMessage.innerText = "特別な情報をお届けできるのは今回限りです、受け取りますか？";
+        }
+
+        // 当選者の声の表示アニメーション
+        const testimonials = document.querySelectorAll(".testimonials p");
+        let testimonialIndex = 0;
+        setInterval(() => {
+            testimonials.forEach((testimonial, index) => {
+                testimonial.style.display = index === testimonialIndex ? "block" : "none";
+            });
+            testimonialIndex = (testimonialIndex + 1) % testimonials.length;
+        }, 3800);
+
+        // リアルタイム当選報告の表示更新
         const winnerNotification = document.getElementById("winner-notification");
         const prefectures = ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"];
-        const initials = "AKSTNHMYR";
+        const initials = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         setInterval(() => {
             const randomPrefecture = prefectures[Math.floor(Math.random() * prefectures.length)];
-            const randomInitial = `${initials[Math.floor(Math.random() * initials.length)]}・${initials[Math.floor(Math.random() * initials.length)]}`;
+            const randomInitial = ${initials[Math.floor(Math.random() * initials.length)]}・${initials[Math.floor(Math.random() * initials.length)]};
             const currentTime = new Date();
-            const timeString = `${currentTime.getHours()}時${String(currentTime.getMinutes()).padStart(2, "0")}分${String(currentTime.getSeconds()).padStart(2, "0")}秒`;
-            winnerNotification.innerHTML = `${randomPrefecture}・${randomInitial}さん 30万円当選しました！<br>${timeString}`;
+            const timeString = ${currentTime.getHours()}時${String(currentTime.getMinutes()).padStart(2, "0")}分${String(currentTime.getSeconds()).padStart(2, "0")}秒;
+            winnerNotification.innerHTML = ${randomPrefecture}・${randomInitial}さん 30万円当選しました！<br>${timeString};
         }, 2000);
     </script>
 </body>
