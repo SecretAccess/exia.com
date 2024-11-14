@@ -62,9 +62,6 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        #next-button {
-            display: inline-block;
-        }
     </style>
 </head>
 <body>
@@ -125,7 +122,7 @@
                 finalMessage.style.display = "block";
                 revealStep++;
 
-                // 最終メッセージで妊娠週数と予定日までの日数を表示
+                // 最後のメッセージで「次へ」ボタンを非表示にし、妊娠情報を表示
                 if (revealStep === messages.length) {
                     const today = new Date();
                     const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
