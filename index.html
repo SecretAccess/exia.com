@@ -86,22 +86,6 @@
             background-color: #444;
             transform: scale(1.05);
         }
-        #next-button {
-            color: #fff;
-        }
-        .secondary-button {
-            font-size: 18px;
-            color: #777;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            margin-left: 20px;
-            padding: 0;
-            transition: color 0.3s;
-        }
-        .secondary-button:hover {
-            color: #555;
-        }
         @keyframes pulse {
             0% { box-shadow: 0 0 8px rgba(50, 50, 50, 0.1); }
             100% { box-shadow: 0 0 12px rgba(50, 50, 50, 0.3); }
@@ -110,7 +94,7 @@
             margin-top: 30px;
             text-align: left;
         }
-        .testimonials h2, .real-time-winner h2 {
+        .testimonials h2 {
             font-size: 16px;
             color: #999;
             margin-bottom: 10px;
@@ -122,7 +106,6 @@
             background-color: #f9f9f9;
             padding: 10px;
             border-radius: 8px;
-            position: relative;
         }
         .real-time-winner {
             margin-top: 30px;
@@ -160,7 +143,6 @@
         <div id="popup">
             <p id="popup-message">特別な情報が見つかりました。<br>次のステップに進みますか？</p>
             <button class="highlight-button" onclick="revealNextStep()">はい</button>
-            <button class="secondary-button" onclick="confirmAgain()">いいえ</button>
         </div>
 
         <p id="final-message"></p>
@@ -191,50 +173,27 @@
             "2025年6月に莉緒がお姉さんになります！"
         ];
 
-        function scrollToCenter(elementId) {
-            document.getElementById(elementId).scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-
         function startLottery() {
             const button = document.querySelector(".button-primary");
             button.disabled = true;
-            button.style.backgroundColor = "#aaa";
             button.innerText = "結果を確認中...";
 
             setTimeout(() => {
                 document.getElementById("result").innerText = "残念！ハズれてしまいました。";
                 document.getElementById("result").style.display = "block";
-                scrollToCenter("result");
-                button.style.display = "none";
 
                 setTimeout(() => {
                     document.getElementById("popup").style.display = "block";
-                    scrollToCenter("popup");
                 }, 1000);
             }, 3000);
         }
 
         function revealNextStep() {
             const finalMessage = document.getElementById("final-message");
-            const nextButton = document.getElementById("next-button");
-
             if (revealStep < messages.length) {
-                finalMessage.innerText = messages[revealStep];
+                finalMessage.innerText = messages[revealStep++];
                 finalMessage.style.display = "block";
-                scrollToCenter("final-message");
-                revealStep++;
-                
-                if (revealStep < messages.length) {
-                    nextButton.style.display = "inline-block";
-                } else {
-                    nextButton.style.display = "none";
-                }
             }
-        }
-
-        function confirmAgain() {
-            const popupMessage = document.getElementById("popup-message");
-            popupMessage.innerText = "特別な情報をお届けできるのは今回限りです、受け取りますか？";
         }
 
         // 当選者の声の表示アニメーション
@@ -249,15 +208,13 @@
 
         // リアルタイム当選報告の表示更新
         const winnerNotification = document.getElementById("winner-notification");
-        const prefectures = ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"];
+        const prefectures = ["北海道", "埼玉県", "東京都", "大阪府"];
         const initials = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
         setInterval(() => {
             const randomPrefecture = prefectures[Math.floor(Math.random() * prefectures.length)];
-            const randomInitial = ${initials[Math.floor(Math.random() * initials.length)]}・${initials[Math.floor(Math.random() * initials.length)]};
-            const currentTime = new Date();
-            const timeString = ${currentTime.getHours()}時${String(currentTime.getMinutes()).padStart(2, "0")}分${String(currentTime.getSeconds()).padStart(2, "0")}秒;
-            winnerNotification.innerHTML = ${randomPrefecture}・${randomInitial}さん 30万円当選しました！<br>${timeString};
+            const randomInitial = `${initials[Math.floor(Math.random() * initials.length)]}・${initials[Math.floor(Math.random() * initials.length)]}`;
+            const timeString = new Date().toLocaleTimeString();
+            winnerNotification.innerHTML = `${randomPrefecture}・${randomInitial}さん 30万円当選しました！<br>${timeString}`;
         }, 2000);
     </script>
 </body>
