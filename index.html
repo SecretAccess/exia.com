@@ -26,6 +26,13 @@
             text-align: center;
             margin-bottom: 20px;
         }
+        .top-image img {
+            width: 100%;
+            margin: 0 auto 20px;
+            display: block;
+            opacity: 0.9;
+            filter: grayscale(80%) contrast(110%);
+        }
         .button-primary, .highlight-button, #next-button {
             padding: 15px 30px;
             font-size: 18px;
@@ -74,7 +81,17 @@
 </head>
 <body>
     <div class="container">
+        <div class="top-image">
+            <img src="28e35337-acb5-415d-894a-9b901a0831e7.jpg" alt="キャンペーンロゴ">
+        </div>
+        <div class="invitation-info">
+            招待者限定キャンペーン<br>招待者: N・K様
+        </div>
         <h1>30万円プレゼント<br>キャンペーン</h1>
+        <p class="description">
+            特別な招待を受けた方のみが参加可能なキャンペーンです。<br>抽選で<b>30万円</b>を贈呈いたします。さっそく抽選をスタートし、<br>幸運を引き寄せてください。
+        </p>
+
         <button class="button-primary" onclick="startLottery()">抽選スタート</button>
 
         <p id="result"></p>
