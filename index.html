@@ -166,13 +166,6 @@ footer {
     <div class="real-time-winner">
         <h2>リアルタイム当選報告</h2>
         <p id="winner-notification">埼玉県・S・Aさん 30万円当選しました！<br>11時51分32秒</p>
-        <div id="chat-container">
-    <h2>リアルタイムコメント</h2>
-    <input type="text" id="chat-input" placeholder="コメントを入力してください...">
-    <button onclick="addComment()">送信</button>
-    <div id="chat-box"></div>
-</div>
-
         <!-- フッター -->
 <footer>
     <div class="footer-links">
@@ -258,9 +251,9 @@ footer {
         const initials = "AKSTNHMYRW";
         setInterval(() => {
             const randomPrefecture = prefectures[Math.floor(Math.random() * prefectures.length)];
-            const randomInitial = `${initials[Math.floor(Math.random() * initials.length)]}・${initials[Math.floor(Math.random() * initials.length)]}`;
+            const randomInitial = ${initials[Math.floor(Math.random() * initials.length)]}・${initials[Math.floor(Math.random() * initials.length)]};
             const timeString = new Date().toLocaleTimeString();
-            winnerNotification.innerHTML = `${randomPrefecture}・${randomInitial}さん 30万円当選しました！<br>${timeString}`;
+            winnerNotification.innerHTML = ${randomPrefecture}・${randomInitial}さん 30万円当選しました！<br>${timeString};
         }, 2000);
         // モーダルを開く関数
 function openModal(modalId) {
@@ -281,16 +274,6 @@ window.onclick = function(event) {
         }
     });
 };
-function addComment() {
-    const input = document.getElementById('chat-input');
-    const chatBox = document.getElementById('chat-box');
-    if (input.value.trim() !== '') {
-        const comment = document.createElement('p');
-        comment.textContent = input.value;
-        chatBox.appendChild(comment);
-        input.value = '';
-    }
-}
 
     </script>
 </body>
