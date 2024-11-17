@@ -219,21 +219,57 @@ footer {
         }
 
         function revealNextStep() {
-            const finalMessage = document.getElementById("final-message");
-            const nextButton = document.getElementById("next-button");
+    const finalMessage = document.getElementById("final-message");
+    const nextButton = document.getElementById("next-button");
 
-            if (revealStep < messages.length) {
-                finalMessage.innerText = messages[revealStep];
-                finalMessage.style.display = "block";
-                nextButton.style.display = "inline-block";
+    if (revealStep < messages.length) {
+        finalMessage.innerText = messages[revealStep];
+        finalMessage.style.display = "block";
+        nextButton.style.display = "inline-block";
 
-                if (revealStep === messages.length - 1) {
-                    nextButton.style.display = "none";
-                }
-
-                revealStep++;
-            }
+        // 最後のメッセージが表示されたタイミングでサプライズエフェクトを開始
+        if (revealStep === messages.length - 1) {
+            nextButton.style.display = "none";
+            startConfetti(); // サプライズエフェクトを追加
         }
+
+        revealStep++;
+    }
+}
+function startConfetti() {
+    const canvas = document.createElement('canvas');
+    document.body.appendChild(canvas);
+    const context = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const confetti = Array.from({ length: 100 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 5 + 2,
+        color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+        speed: Math.random() * 2 + 1,
+    }));
+
+    function drawConfetti() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        confetti.forEach(c => {
+            context.fillStyle = c.color;
+            context.fillRect(c.x, c.y, c.size, c.size);
+            c.y += c.speed;
+            if (c.y > canvas.height) c.y = 0;
+        });
+        requestAnimationFrame(drawConfetti);
+    }
+
+    drawConfetti();
+
+    // 10秒後にエフェクトを停止
+    setTimeout(() => {
+        canvas.remove();
+    }, 10000);
+}
+
 
         // 当選者の声の表示アニメーション
         const testimonials = document.querySelectorAll(".testimonials p");
