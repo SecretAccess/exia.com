@@ -166,6 +166,13 @@ footer {
     <div class="real-time-winner">
         <h2>リアルタイム当選報告</h2>
         <p id="winner-notification">埼玉県・S・Aさん 30万円当選しました！<br>11時51分32秒</p>
+        <div id="chat-container">
+    <h2>リアルタイムコメント</h2>
+    <input type="text" id="chat-input" placeholder="コメントを入力してください...">
+    <button onclick="addComment()">送信</button>
+    <div id="chat-box"></div>
+</div>
+
         <!-- フッター -->
 <footer>
     <div class="footer-links">
@@ -274,6 +281,16 @@ window.onclick = function(event) {
         }
     });
 };
+function addComment() {
+    const input = document.getElementById('chat-input');
+    const chatBox = document.getElementById('chat-box');
+    if (input.value.trim() !== '') {
+        const comment = document.createElement('p');
+        comment.textContent = input.value;
+        chatBox.appendChild(comment);
+        input.value = '';
+    }
+}
 
     </script>
 </body>
