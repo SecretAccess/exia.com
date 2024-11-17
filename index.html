@@ -162,10 +162,17 @@ footer {
         <p>“このキャンペーンは本当に素晴らしいです！” - Y・Nさん</p>
     </div>
 
-    <!-- リアルタイム当選報告 -->
-    <div class="real-time-winner">
-        <h2>リアルタイム当選報告</h2>
-        <p id="winner-notification">埼玉県・S・Aさん 30万円当選しました！<br>11時51分32秒</p>
+    // リアルタイム当選報告の表示更新
+const winnerNotification = document.getElementById("winner-notification");
+const prefectures = ["北海道", "埼玉県", "長崎県", "宮城県", "京都府", "青森県", "兵庫県", "沖縄県", "東京都", "大阪府"];
+const initials = "AKSTNHMYRW";
+
+setInterval(() => {
+    const randomPrefecture = prefectures[Math.floor(Math.random() * prefectures.length)];
+    const randomInitial = `${initials[Math.floor(Math.random() * initials.length)]}・${initials[Math.floor(Math.random() * initials.length)]}`;
+    const timeString = new Date().toLocaleTimeString();
+    winnerNotification.innerHTML = `${randomPrefecture}・${randomInitial}さん 30万円当選しました！<br>${timeString}`;
+}, 2000);
         <!-- フッター -->
 <footer>
     <div class="footer-links">
@@ -236,38 +243,14 @@ footer {
         revealStep++;
     }
 }
-function startConfetti() {
-    const canvas = document.createElement('canvas');
-    document.body.appendChild(canvas);
-    const context = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+ // 最後のメッセージが表示されたタイミングでサプライズエフェクトを開始
+        if (revealStep === messages.length - 1) {
+            nextButton.style.display = "none";
+            startConfetti(); // サプライズエフェクトを追加
+        }
 
-    const confetti = Array.from({ length: 100 }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 5 + 2,
-        color: `hsl(${Math.random() * 360}, 100%, 50%)`,
-        speed: Math.random() * 2 + 1,
-    }));
-
-    function drawConfetti() {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        confetti.forEach(c => {
-            context.fillStyle = c.color;
-            context.fillRect(c.x, c.y, c.size, c.size);
-            c.y += c.speed;
-            if (c.y > canvas.height) c.y = 0;
-        });
-        requestAnimationFrame(drawConfetti);
+        revealStep++;
     }
-
-    drawConfetti();
-
-    // 10秒後にエフェクトを停止
-    setTimeout(() => {
-        canvas.remove();
-    }, 10000);
 }
 
 
