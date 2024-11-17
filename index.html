@@ -75,6 +75,54 @@
             font-weight: bold;
             animation: slide-up 2s ease infinite;
         }
+        /* フッター */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px 0;
+    background-color: #333;
+    color: #fff;
+    font-size: 14px;
+}
+
+.footer-links button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 5px;
+}
+
+/* モーダル */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
     </style>
 </head>
 <body>
@@ -118,6 +166,33 @@
     <div class="real-time-winner">
         <h2>リアルタイム当選報告</h2>
         <p id="winner-notification">埼玉県・S・Aさん 30万円当選しました！<br>11時51分32秒</p>
+        <!-- フッター -->
+<footer>
+    <div class="footer-links">
+        <button onclick="openModal('terms-modal')">利用規約</button> |
+        <button onclick="openModal('privacy-modal')">プライバシーポリシー</button> |
+        <button onclick="window.location.href='mailto:support@example.com'">お問い合わせ</button>
+    </div>
+</footer>
+
+<!-- 利用規約モーダル -->
+<div id="terms-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal('terms-modal')">&times;</span>
+        <h2>利用規約</h2>
+        <p>このキャンペーンは、招待者限定で参加可能です。当選者は、厳正なる抽選の上決定されます。参加者は以下の条件に同意するものとします...</p>
+    </div>
+</div>
+
+<!-- プライバシーポリシーモーダル -->
+<div id="privacy-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal('privacy-modal')">&times;</span>
+        <h2>プライバシーポリシー</h2>
+        <p>当サイトでは、個人情報の保護に努めております。ご提供いただいた情報は、キャンペーン運営の目的にのみ使用されます...</p>
+    </div>
+</div>
+
     </div>
 
     <script>
@@ -180,6 +255,26 @@
             const timeString = new Date().toLocaleTimeString();
             winnerNotification.innerHTML = `${randomPrefecture}・${randomInitial}さん 30万円当選しました！<br>${timeString}`;
         }, 2000);
+        // モーダルを開く関数
+function openModal(modalId) {
+    document.getElementById(modalId).style.display = "flex";
+}
+
+// モーダルを閉じる関数
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+}
+
+// モーダルの外をクリックして閉じる
+window.onclick = function(event) {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+};
+
     </script>
 </body>
 </html>
