@@ -162,18 +162,9 @@ footer {
         <p>“このキャンペーンは本当に素晴らしいです！” - Y・Nさん</p>
     </div>
 
-    // リアルタイム当選報告の表示更新
-    <div id="winner-notification"></div>
-const winnerNotification = document.getElementById("winner-notification");
-const prefectures = ["北海道", "埼玉県", "長崎県", "宮城県", "京都府", "青森県", "兵庫県", "沖縄県", "東京都", "大阪府"];
-const initials = "AKSTNHMYRW";
+    
 
-setInterval(() => {
-    const randomPrefecture = prefectures[Math.floor(Math.random() * prefectures.length)];
-   const randomInitial = `${initials[Math.floor(Math.random() * initials.length)]}・${initials[Math.floor(Math.random() * initials.length)]}`;
-const timeString = new Date().toLocaleTimeString();
-winnerNotification.innerHTML = `${randomPrefecture}・${randomInitial}さん 30万円当選しました！<br>${timeString}`;
-}, 2000);
+
         <!-- フッター -->
 <footer>
     <div class="footer-links">
@@ -226,7 +217,7 @@ winnerNotification.innerHTML = `${randomPrefecture}・${randomInitial}さん 30�
             }, 3000);
         }
 
-        function revealNextStep() {
+       function revealNextStep() {
     const finalMessage = document.getElementById("final-message");
     const nextButton = document.getElementById("next-button");
 
@@ -235,22 +226,22 @@ winnerNotification.innerHTML = `${randomPrefecture}・${randomInitial}さん 30�
         finalMessage.style.display = "block";
         nextButton.style.display = "inline-block";
 
-        // 最後のメッセージが表示されたタイミングでサプライズエフェクトを開始
         if (revealStep === messages.length - 1) {
             nextButton.style.display = "none";
-            startConfetti(); // サプライズエフェクトを追加
+            startConfetti();
         }
 
         revealStep++;
     }
 }
+
+
  // 最後のメッセージが表示されたタイミングでサプライズエフェクトを開始
         if (revealStep === messages.length - 1) {
             nextButton.style.display = "none";
             startConfetti(); // サプライズエフェクトを追加
         }
 
-        revealStep++;
     }
 }
 
@@ -271,9 +262,9 @@ winnerNotification.innerHTML = `${randomPrefecture}・${randomInitial}さん 30�
         const initials = "AKSTNHMYRW";
         setInterval(() => {
             const randomPrefecture = prefectures[Math.floor(Math.random() * prefectures.length)];
-            const randomInitial = ${initials[Math.floor(Math.random() * initials.length)]}・${initials[Math.floor(Math.random() * initials.length)]};
-            const timeString = new Date().toLocaleTimeString();
-            winnerNotification.innerHTML = ${randomPrefecture}・${randomInitial}さん 30万円当選しました！<br>${timeString};
+            const randomInitial = `${initials[Math.floor(Math.random() * initials.length)]}・${initials[Math.floor(Math.random() * initials.length)]}`;
+const timeString = new Date().toLocaleTimeString();
+winnerNotification.innerHTML = `${randomPrefecture}・${randomInitial}さん 30万円当選しました！<br>${timeString}`;
         }, 2000);
         // モーダルを開く関数
 function openModal(modalId) {
@@ -294,6 +285,9 @@ window.onclick = function(event) {
         }
     });
 };
+function startConfetti() {
+    alert("おめでとうございます！サプライズエフェクトが表示されます。");
+}
 
     </script>
 </body>
