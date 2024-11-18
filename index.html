@@ -163,9 +163,10 @@ footer {
     </div>
 
     
+<div id="winner-notification"></div>
 
 
-        <!-- フッター -->
+    
 <footer>
     <div class="footer-links">
         <button onclick="openModal('terms-modal')">利用規約</button> |
@@ -217,7 +218,7 @@ footer {
             }, 3000);
         }
 
-       function revealNextStep() {
+ function revealNextStep() {
     const finalMessage = document.getElementById("final-message");
     const nextButton = document.getElementById("next-button");
 
@@ -234,18 +235,6 @@ footer {
         revealStep++;
     }
 }
-
-
- // 最後のメッセージが表示されたタイミングでサプライズエフェクトを開始
-        if (revealStep === messages.length - 1) {
-            nextButton.style.display = "none";
-            startConfetti(); // サプライズエフェクトを追加
-        }
-
-    }
-}
-
-
         // 当選者の声の表示アニメーション
         const testimonials = document.querySelectorAll(".testimonials p");
         let testimonialIndex = 0;
