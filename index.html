@@ -19,17 +19,15 @@
         }
         .container {
             max-width: 600px;
-            background: #ffffff;
+            background: #fff;
             padding: 40px;
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
             text-align: center;
-            margin-bottom: 20px;
         }
         .top-image img {
             width: 100%;
-            margin: 0 auto 20px;
-            display: block;
+            margin-bottom: 20px;
             opacity: 0.9;
             filter: grayscale(80%) contrast(110%);
         }
@@ -42,7 +40,6 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 20px;
-            transition: background-color 0.3s;
         }
         .highlight-button:hover, #next-button:hover {
             background-color: #444;
@@ -54,75 +51,54 @@
             margin-top: 30px;
             text-align: left;
         }
-        .testimonials h2 {
-            font-size: 16px;
-            color: #999;
-            margin-bottom: 10px;
-        }
         .testimonials p {
             display: none;
             margin: 5px 0;
-            transition: opacity 1s ease-in-out;
-            background-color: #f9f9f9;
             padding: 10px;
+            background-color: #f9f9f9;
             border-radius: 8px;
         }
         .real-time-winner {
             margin-top: 30px;
             text-align: left;
         }
-        .real-time-winner p {
-            font-weight: bold;
-            animation: slide-up 2s ease infinite;
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px 0;
+            background-color: #333;
+            color: #fff;
         }
-        /* フッター */
-footer {
-    text-align: center;
-    margin-top: 40px;
-    padding: 20px 0;
-    background-color: #333;
-    color: #fff;
-    font-size: 14px;
-}
-
-.footer-links button {
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    text-decoration: underline;
-    padding: 5px;
-}
-
-/* モーダル */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 500px;
-    width: 90%;
-}
-
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 24px;
-    cursor: pointer;
-}
-
+        .footer-links button {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -130,22 +106,13 @@ footer {
         <div class="top-image">
             <img src="28e35337-acb5-415d-894a-9b901a0831e7.jpg" alt="キャンペーンロゴ">
         </div>
-        <div class="invitation-info">
-            招待者限定キャンペーン<br>招待者: N・K様
-        </div>
-        <h1>30万円プレゼント<br>キャンペーン</h1>
-        <p class="description">
-            特別な招待を受けた方のみが参加可能なキャンペーンです。<br>抽選で<b>30万円</b>を贈呈いたします。<br>さっそく抽選をスタートし、<br>幸運を引き寄せてください。
-        </p>
-
+        <h1>30万円プレゼントキャンペーン</h1>
         <button class="button-primary" onclick="startLottery()">抽選スタート</button>
-
         <p id="result"></p>
         <div id="popup">
-            <p id="popup-message">お客様だけの特別な<br>キャンペーンが見つかりました。<br>次のステップに進みますか？</p>
+            <p>特別なキャンペーンが見つかりました。次に進みますか？</p>
             <button class="highlight-button" onclick="revealNextStep()">はい</button>
         </div>
-
         <p id="final-message"></p>
         <button id="next-button" onclick="revealNextStep()">次へ</button>
     </div>
@@ -158,41 +125,33 @@ footer {
         <p>“このチャンスを掴めて良かったです！” - M・Aさん</p>
         <p>“丁寧な運営さんで安心しました！” - I・Yさん</p>
         <p>“翌日入金で早かった！” - S・Aさん</p>
-        <p>“迅速で丁寧な対応、最高です！” - R・Kさん</p>
-        <p>“このキャンペーンは本当に素晴らしいです！” - Y・Nさん</p>
     </div>
 
-    
-<div id="winner-notification"></div>
+    <div id="winner-notification"></div>
 
+    <footer>
+        <div class="footer-links">
+            <button onclick="openModal('terms-modal')">利用規約</button> |
+            <button onclick="openModal('privacy-modal')">プライバシーポリシー</button> |
+            <button onclick="window.location.href='mailto:support@example.com'">お問い合わせ</button>
+        </div>
+    </footer>
 
-    
-<footer>
-    <div class="footer-links">
-        <button onclick="openModal('terms-modal')">利用規約</button> |
-        <button onclick="openModal('privacy-modal')">プライバシーポリシー</button> |
-        <button onclick="window.location.href='mailto:support@example.com'">お問い合わせ</button>
+    <!-- モーダル -->
+    <div id="terms-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('terms-modal')">&times;</span>
+            <h2>利用規約</h2>
+            <p>このキャンペーンは、招待者限定で参加可能です。当選者は厳正に決定されます。</p>
+        </div>
     </div>
-</footer>
 
-<!-- 利用規約モーダル -->
-<div id="terms-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-button" onclick="closeModal('terms-modal')">&times;</span>
-        <h2>利用規約</h2>
-        <p>このキャンペーンは、招待者限定で参加可能です。当選者は、厳正なる抽選の上決定されます。参加者は以下の条件に同意するものとします...</p>
-    </div>
-</div>
-
-<!-- プライバシーポリシーモーダル -->
-<div id="privacy-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-button" onclick="closeModal('privacy-modal')">&times;</span>
-        <h2>プライバシーポリシー</h2>
-        <p>当サイトでは、個人情報の保護に努めております。ご提供いただいた情報は、キャンペーン運営の目的にのみ使用されます...</p>
-    </div>
-</div>
-
+    <div id="privacy-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('privacy-modal')">&times;</span>
+            <h2>プライバシーポリシー</h2>
+            <p>当サイトでは個人情報を適切に保護します。</p>
+        </div>
     </div>
 
     <script>
@@ -200,84 +159,74 @@ footer {
         const messages = [
             "実は2025年6月に…",
             "莉緒が…",
-            "2025年6月に\n莉緒がお姉さんになります！"
+            "2025年6月に莉緒がお姉さんになります！"
         ];
 
         function startLottery() {
             const button = document.querySelector(".button-primary");
             button.disabled = true;
             button.innerText = "結果を確認中...";
-
             setTimeout(() => {
-                document.getElementById("result").innerText = "残念！ハズれてしまいました。";
+                document.getElementById("result").innerText = "残念！ハズれました。";
                 document.getElementById("result").style.display = "block";
-
                 setTimeout(() => {
                     document.getElementById("popup").style.display = "block";
                 }, 1000);
             }, 3000);
         }
 
- function revealNextStep() {
-    const finalMessage = document.getElementById("final-message");
-    const nextButton = document.getElementById("next-button");
-
-    if (revealStep < messages.length) {
-        finalMessage.innerText = messages[revealStep];
-        finalMessage.style.display = "block";
-        nextButton.style.display = "inline-block";
-
-        if (revealStep === messages.length - 1) {
-            nextButton.style.display = "none";
-            startConfetti();
+        function revealNextStep() {
+            const finalMessage = document.getElementById("final-message");
+            const nextButton = document.getElementById("next-button");
+            if (revealStep < messages.length) {
+                finalMessage.innerText = messages[revealStep];
+                finalMessage.style.display = "block";
+                nextButton.style.display = "inline-block";
+                if (revealStep === messages.length - 1) {
+                    nextButton.style.display = "none";
+                    startConfetti();
+                }
+                revealStep++;
+            }
         }
 
-        revealStep++;
-    }
-}
-        // 当選者の声の表示アニメーション
         const testimonials = document.querySelectorAll(".testimonials p");
-        let testimonialIndex = 0;
+        let index = 0;
         setInterval(() => {
-            testimonials.forEach((testimonial, index) => {
-                testimonial.style.display = index === testimonialIndex ? "block" : "none";
+            testimonials.forEach((testimonial, i) => {
+                testimonial.style.display = i === index ? "block" : "none";
             });
-            testimonialIndex = (testimonialIndex + 1) % testimonials.length;
+            index = (index + 1) % testimonials.length;
         }, 3800);
 
-        // リアルタイム当選報告の表示更新
         const winnerNotification = document.getElementById("winner-notification");
-        const prefectures = ["北海道", "埼玉県", "長崎県", "宮城県", "京都府", "青森県", "兵庫県", "沖縄県", "東京都", "大阪府"];
+        const prefectures = ["北海道", "埼玉県", "長崎県", "京都府", "青森県", "兵庫県", "東京都", "大阪府"];
         const initials = "AKSTNHMYRW";
         setInterval(() => {
-            const randomPrefecture = prefectures[Math.floor(Math.random() * prefectures.length)];
-            const randomInitial = `${initials[Math.floor(Math.random() * initials.length)]}・${initials[Math.floor(Math.random() * initials.length)]}`;
-const timeString = new Date().toLocaleTimeString();
-winnerNotification.innerHTML = `${randomPrefecture}・${randomInitial}さん 30万円当選しました！<br>${timeString}`;
+            const prefecture = prefectures[Math.floor(Math.random() * prefectures.length)];
+            const initial = `${initials[Math.floor(Math.random() * initials.length)]}・${initials[Math.floor(Math.random() * initials.length)]}`;
+            winnerNotification.innerHTML = `${prefecture}・${initial}さんが30万円当選しました！`;
         }, 2000);
-        // モーダルを開く関数
-function openModal(modalId) {
-    document.getElementById(modalId).style.display = "flex";
-}
 
-// モーダルを閉じる関数
-function closeModal(modalId) {
-    document.getElementById(modalId).style.display = "none";
-}
-
-// モーダルの外をクリックして閉じる
-window.onclick = function(event) {
-    const modals = document.querySelectorAll('.modal');
-    modals.forEach(modal => {
-        if (event.target === modal) {
-            modal.style.display = "none";
+        function openModal(id) {
+            document.getElementById(id).style.display = "flex";
         }
-    });
-};
-function startConfetti() {
-    alert("おめでとうございます！サプライズエフェクトが表示されます。");
-}
 
+        function closeModal(id) {
+            document.getElementById(id).style.display = "none";
+        }
+
+        window.onclick = (event) => {
+            document.querySelectorAll('.modal').forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+        };
+
+        function startConfetti() {
+            alert("おめでとうございます！サプライズエフェクトが表示されます。");
+        }
     </script>
 </body>
 </html>
